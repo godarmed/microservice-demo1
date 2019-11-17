@@ -1,0 +1,218 @@
+server:
+  port: 8100
+  servlet:
+   context-path: /consumer-8100
+
+
+logging: 
+  config: classpath:log4j2.yml   # 配置log4j2读取的配置文件 
+  file: ../springlogs/consumer-8100.log
+
+#数据库表名配置
+database:
+  #开关
+  isopen: false
+  #前缀
+  prefix: PM_
+
+spring:
+  datasource:
+   initialization-mode: ALWAYS
+   continue-on-error: true
+   data: 
+   - classpath:schema/data.sql
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jpa:
+    hibernate:
+      #配置自定义命名策略
+      naming:
+        physical-strategy: com.eseasky.core.starters.datasource.DataBaseNamingStrategy
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  profiles:
+    active: "@profileActive@"
+  application:
+    name: consumer-8100
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 3
+    host: ${custom.nosql.redis.host}
+    port: ${custom.nosql.redis.port}
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 1
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+  rabbitmq: 
+    addresses: ${custom.nosql.rabbitmq.addresses}
+    port: ${custom.nosql.rabbitmq.port}
+    username: ${custom.nosql.rabbitmq.username}
+    password: ${custom.nosql.rabbitmq.password}
+    virtualHost: /
+    requestedHeartbeat: 7200
+    queues:
+    - name: batchport.apply
+      exchange-name: batchport.topic.exchange
+      bind-name: batchport.apply
+    template:
+     replyTimeout: 500000
+
+  mvc:
+    date-format: yyyy-MM-dd
+
+sharding:
+  jdbc:
+    datasource:
+      names: master,slave0
+      master:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: ${custom.db.url}
+        username: ${custom.db.username}
+        password: ${custom.db.password}
+        maxActive: 20
+        validationQuery: SELECT 1
+        testOnBorrow: false
+        timeBetweenEvictionRunsMillis: 300000
+        testWhileIdle: true
+        minEvictableIdleTimeMillis: 1800000
+        initialSize: 5
+        minIdle: 3
+        maxWait: 30000
+      slave0:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: ${custom.db1.url}
+        username: ${custom.db1.username}
+        password: ${custom.db1.password}
+        maxActive: 20
+        validationQuery: SELECT 1
+        testOnBorrow: false
+        timeBetweenEvictionRunsMillis: 300000
+        testWhileIdle: true
+        minEvictableIdleTimeMillis: 1800000
+        initialSize: 5
+        minIdle: 3
+        maxWait: 30000
+    config:
+      masterslave:
+        load-balance-algorithm-type: ROUND_ROBIN
+        name: ds_ms
+        master-data-source-name: master
+        slave-data-source-names: slave0
+
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #注册中心
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.application.name}
+    instance-id: ${eureka.instance.hostname}:${spring.cloud.client.ip-address}:${server.port}
+    lease-expiration-duration-in-seconds: 30
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: ${server.servlet.context-path}/actuator/health
+#  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}/actuator
+    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+
+#安全配置
+#oauth2配置
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://${custom.oauth.ip}/AuthService/user #获取当前Token的用户信息
+    client:
+      clientId: ${custom.oauth.clientId}
+      clientSecret: ${custom.oauth.clientSecret}
+      accessTokenUri: http://${custom.oauth.ip}/AuthService/oauth/token #获取Token
+      user-authorization-uri: http://${custom.oauth.ip}/AuthService/oauth/authorize
+      grant-type: client_credentials,password,authorization_code,implicit,refresh_token
+      pre-established-redirect-uri: http://baidu.com
+      scope: all
+      ignoreUrl: /actuator/**
+
+swagger:
+  enable: true
+
+upload:
+  prefix: /images/**
+  absolute-path: ${custom.upload.absolute-path}
+  local-path: /AppService/images
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 90000
+  
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          strategy: SEMAPHORE # 必须设置 不设置则feign报错
+          thread:
+            timeoutInMilliseconds: 180000
+#    MediaServiceImpl#addMedia(String,MultipartFile):
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          strategy: SEMAPHORE # 必须设置 不设置则feign报错
+#          thread:
+#            timeoutInMilliseconds: 5000
+
+ribbon:
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 90000   #负载均衡超时时间，默认值5000  180000
+  ConnectTimeout: 2000 #ribbon请求连接的超时时间，默认值2000
+  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+
+
+remote:
+  feign:
+    hwserver:
+      name: HwService
+      addPort: /HwService/port/addPort
+      addPubServer: /HwService/pubservice/add
+      updatePubServer: /HwService/pubservice/update
+      getPubServer: /HwService/pubservice/get
+      queryPubServer: /HwService/pubservice/query
