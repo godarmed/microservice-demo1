@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @ApiModel(value = "ExcelEntityTask",description = "端口号zip批量申请任务表")
@@ -36,4 +37,9 @@ public class ExcelEntityTask implements Serializable{
 	
 	private Integer total;
 
+	@OneToMany(mappedBy="excelEntityTask",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	//级联保存、更新、删除、刷新;延迟加载。当删除用户，会级联删除该用户的所有文章
+	//拥有mappedBy注解的实体类为关系被维护端
+	//mappedBy="author"中的author是Article中的author属性
+	private List<ExcelEntityDetail> excelEntityDetailList;//任务详情
 }

@@ -53,30 +53,6 @@ public class ExcelEntityServiceImpl implements ExcelEntityService {
     }
 
     @Override
-    public List<ExcelEntityDetail> queryExcelEntityDetailByTaskId(Long id) {
-        return excelEntityDetailRepository.findExcelEntityDetailByTaskId(id);
-    }
-
-    @Override
-    public List<ExcelEntityTask> queryExcelEntityTaskAll() {
-        return excelEntityTaskRepository.findAll();
-    }
-
-    @Override
-    public Long deleteExcelEntityTask(long id) {
-        //查询
-        ExcelEntityTask excelEntityTask = excelEntityTaskRepository.findById(id).get();
-        if (excelEntityTask != null) {
-            //删除详情
-            List<ExcelEntityDetail> excelEntityDetails = excelEntityDetailRepository.findExcelEntityDetailByTaskId(id);
-            excelEntityDetailRepository.deleteAll(excelEntityDetails);
-            //删除任务
-            excelEntityTaskRepository.deleteById(id);
-        }
-        return id;
-    }
-
-    @Override
     public Page<ExcelEntityTask> queryExcelEntityTask(BaseExcelEntityDTO baseExcelEntityDTO) {
         Pageable pageable = PageRequest.of(baseExcelEntityDTO.getPage(), baseExcelEntityDTO.getSize(), Sort.by(Sort.Direction.DESC, "id"));
         Page<ExcelEntityTask> tpProductVOPage = excelEntityTaskRepository.findAll(new Specification<ExcelEntityTask>() {
@@ -93,5 +69,28 @@ public class ExcelEntityServiceImpl implements ExcelEntityService {
             }
         }, pageable);
         return tpProductVOPage;
+    }
+
+    @Override
+    public List<ExcelEntityTask> queryExcelEntityTaskAll() {
+        return excelEntityTaskRepository.findAll();
+    }
+
+    @Override
+    public Long deleteExcelEntityTask(long id) {
+        //查询
+        if (excelEntityTaskRepository.existsById(id)) {
+            excelEntityTaskRepository.deleteById(id);
+        }
+        return id;
+    }
+
+    @Override
+    public Long deleteExcelEntityDetail(long id) {
+        //查询
+        if (excelEntityDetailRepository.existsById(id)) {
+            excelEntityDetailRepository.deleteById(id);
+        }
+        return id;
     }
 }

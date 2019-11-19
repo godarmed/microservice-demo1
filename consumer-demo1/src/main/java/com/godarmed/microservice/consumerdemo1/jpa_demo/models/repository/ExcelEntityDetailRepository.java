@@ -11,5 +11,5 @@ import java.util.List;
 public interface ExcelEntityDetailRepository extends JpaRepository<ExcelEntityDetail, Long>, JpaSpecificationExecutor<ExcelEntityDetail> {
     ExcelEntityDetail findExcelEntityByPort(String port);
 
-    List<ExcelEntityDetail> findExcelEntityDetailByTaskId(Long taskId);
+    //List<ExcelEntityDetail> findExcelEntityDetailByTaskId(Long taskId);
 }

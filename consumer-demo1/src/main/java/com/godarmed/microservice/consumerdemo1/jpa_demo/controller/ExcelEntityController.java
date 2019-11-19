@@ -1,5 +1,6 @@
 package com.godarmed.microservice.consumerdemo1.jpa_demo.controller;
 
+import com.eseasky.core.starters.redis.RedisUtils;
 import com.eseasky.global.entity.MsgPageInfo;
 import com.eseasky.global.entity.ResultModel;
 import com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity.ExcelEntityDetail;
@@ -60,7 +61,7 @@ public class ExcelEntityController {
         for (ExcelEntityTask task : listTask) {
             QueryExcelEntityDetailVO queryExcelEntityDetailVO = new QueryExcelEntityDetailVO();
             BeanUtils.copyProperties(task,queryExcelEntityDetailVO);
-            queryExcelEntityDetailVO.setExcelEntityDetails(queryExcelEntityDetail(task.getId(),queryExcelEntityDetailVO));
+            queryExcelEntityDetailVO.setExcelEntityDetails(queryExcelEntityDetail(task,queryExcelEntityDetailVO));
             queryExcelEntityDetailVO.setApplyProcess(100 * queryExcelEntityDetailVO.getExcelEntityDetails().size() / task.getTotal());
             queryExcelEntityDetailVOS.add(queryExcelEntityDetailVO);
         }
@@ -69,14 +70,14 @@ public class ExcelEntityController {
     }
 
     //查询单个任务下的所有
-    public List<ExcelEntityDetail> queryExcelEntityDetail(Long id, QueryExcelEntityDetailVO excelEntityDetailVO) {
+    public List<ExcelEntityDetail> queryExcelEntityDetail(ExcelEntityTask excelEntityTask, QueryExcelEntityDetailVO excelEntityDetailVO) {
 
         //成功条数
         AtomicInteger successNum = new AtomicInteger(0);
         //失败条数
         AtomicInteger failureNum = new AtomicInteger(0);
 
-        List<ExcelEntityDetail> pageBatchPorts = excelEntityService.queryExcelEntityDetailByTaskId(id);
+        List<ExcelEntityDetail> pageBatchPorts = excelEntityTask.getExcelEntityDetailList();
         pageBatchPorts = pageBatchPorts.stream()
                 .map(item -> {     //计数并转换对象
                     if (item.getStatus().equals("失败")) {
@@ -104,13 +105,27 @@ public class ExcelEntityController {
         }catch (Exception e){
             throw new RuntimeException("该任务不存在");
         }
-        List<ExcelEntityDetail> pageBatchPorts = excelEntityService.queryExcelEntityDetailByTaskId(baseDTO.getId());
+        List<ExcelEntityDetail> pageBatchPorts = excelEntityTask.getExcelEntityDetailList();
         if(pageBatchPorts==null || pageBatchPorts.size() < excelEntityTask.getTotal()){
             throw new RuntimeException("该任务未执行完,无法删除");
         }
         ResultModel<Long> msgReturn = new ResultModel<>();
         try {
             msgReturn.setData(excelEntityService.deleteExcelEntityTask(baseDTO.getId()));
+        }catch (Exception e){
+            msgReturn.setSubCode(500);
+            msgReturn.setMessage("删除失败");
+        }
+        //删除详情
+        return msgReturn;
+    }
+
+    //删除
+    @RequestMapping("/deleteExcelDetail")
+    public ResultModel<Long> deleteExcelEntityTaskTest(@RequestBody BaseExcelEntityDTO baseDTO) {
+        ResultModel<Long> msgReturn = new ResultModel<>();
+        try {
+            msgReturn.setData(excelEntityService.deleteExcelEntityDetail(baseDTO.getId()));
         }catch (Exception e){
             msgReturn.setSubCode(500);
             msgReturn.setMessage("删除失败");

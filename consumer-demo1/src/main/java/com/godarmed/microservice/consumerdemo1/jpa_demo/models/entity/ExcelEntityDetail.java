@@ -1,10 +1,15 @@
 package com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity;
 
 import com.alibaba.excel.metadata.BaseRowModel;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,8 +35,6 @@ public class ExcelEntityDetail extends BaseRowModel implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-	private Long taskId;
 	
 	private Integer rows;
 
@@ -72,11 +75,13 @@ public class ExcelEntityDetail extends BaseRowModel implements Serializable{
     @ApiModelProperty(value = "错误码")
     private Integer errorcode = 0;
     
-   /* //服务号信息
+    //服务号信息
 	@ApiModelProperty(value = "端口号zip批量申请任务表")
 	@ManyToOne(cascade=CascadeType.DETACH ,fetch = FetchType.LAZY)
-	@JoinColumn(name="task_id",foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+	@JoinColumn(name="task_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
 	@NotFound(action = NotFoundAction.IGNORE)
-    private ExcelEntityTask excelEntityTask;*/
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonBackReference
+    private ExcelEntityTask excelEntityTask;
 
 }

@@ -18,13 +18,13 @@ public interface ExcelEntityService {
 
     Page<ExcelEntityTask> queryExcelEntityTask(BaseExcelEntityDTO baseExcelEntityDTO);
 
-    List<ExcelEntityDetail> queryExcelEntityDetailByTaskId(Long id);
-
     ExcelEntityTask queryExcelEntityTaskById(Long id);
 
     ExcelEntityDetail queryExcelEntityDetailById(Long id);
 
     Long deleteExcelEntityTask(long id);
+
+    Long deleteExcelEntityDetail(long id);
 
 
 }
