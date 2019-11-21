@@ -1,6 +1,6 @@
 package com.godarmed.microservice.consumerdemo1.common.controller;
 
-import com.eseasky.global.entity.ResultModel;
+import com.godarmed.core.starters.global.entity.ResultModel;
 import com.godarmed.microservice.consumerdemo1.common.protocol.vo.RequestMsg;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;

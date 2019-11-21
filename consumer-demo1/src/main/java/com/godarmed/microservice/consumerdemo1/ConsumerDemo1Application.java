@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.godarmed.core.starters.*","com.godarmed.microservice.consumerdemo1"})
 @EnableEurekaClient
 @EnableSwagger2
 @EnableCaching
@@ -17,7 +17,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAsync
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class ConsumerDemo1Application {
-
     public static void main(String[] args) {
         SpringApplication.run(ConsumerDemo1Application.class, args);
     }
