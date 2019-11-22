@@ -1,0 +1,133 @@
+server:
+  port: 9740
+  servlet:
+    context-path: /AuthService
+    
+logging: 
+  config: classpath:log4j2.yml   # 配置log4j2读取的配置文件
+  file: ../springlogs/authservice.log
+
+spring:
+  datasource:
+   initialization-mode: ALWAYS
+   continue-on-error: true
+   schema:
+   - classpath:schema/auth.sql
+   data:
+   - classpath:schema/data.sql
+  application:
+    name: AuthService
+  profiles:
+    active: "@profileActive@"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 3
+    host: ${custom.nosql.redis.host}
+    port: ${custom.nosql.redis.port}
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 1
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+  rabbitmq:
+    addresses: ${custom.nosql.rabbitmq.addresses}
+    port: ${custom.nosql.rabbitmq.port}
+    username: ${custom.nosql.rabbitmq.username}
+    password: ${custom.nosql.rabbitmq.password}
+    virtualHost: /
+    requestedHeartbeat: 7200
+    queues:
+    - name: logger.persistence
+      exchange-name: topic.exchange
+      bind-name: logger.persistence
+    template:
+     replyTimeout: 500000
+
+sharding:
+  jdbc:
+    datasource:
+      names: master,slave0
+      master:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: ${custom.db.url}
+        username: ${custom.db.username}
+        password: ${custom.db.password}
+        maxActive: 20
+        validationQuery: SELECT 1
+        testOnBorrow: false
+        timeBetweenEvictionRunsMillis: 300000
+        testWhileIdle: true
+        minEvictableIdleTimeMillis: 1800000
+        initialSize: 5
+        minIdle: 3
+        maxWait: 30000
+      slave0:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: ${custom.db1.url}
+        username: ${custom.db1.username}
+        password: ${custom.db1.password}
+        maxActive: 20
+        validationQuery: SELECT 1
+        testOnBorrow: false
+        timeBetweenEvictionRunsMillis: 300000
+        testWhileIdle: true
+        minEvictableIdleTimeMillis: 1800000
+        initialSize: 5
+        minIdle: 3
+        maxWait: 30000
+    config:
+      masterslave:
+        load-balance-algorithm-type: ROUND_ROBIN
+        name: ds_ms
+        master-data-source-name: master
+        slave-data-source-names: slave0
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #注册中心
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.application.name}
+    instance-id: ${eureka.instance.hostname}:${spring.cloud.client.ip-address}:${server.port}
+    lease-expiration-duration-in-seconds: 30 
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: ${server.servlet.context-path}/actuator/health
+#  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}/actuator
+    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+
+#安全配置
+#oauth2配置
+security:
+  oauth2:
+    resource:
+      filter-order: 3

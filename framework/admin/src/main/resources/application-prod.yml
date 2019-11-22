@@ -1,0 +1,29 @@
+custom:
+  nosql:
+    redis:
+      host: 10.10.214.67
+      port: 6379
+    rabbitmq:
+      addresses: 10.10.214.67
+      port: 5672
+      username: mnet
+      password: mnet
+  db:
+    url: jdbc:mysql://10.10.214.67:3306/mnet?useUnicode=true&characterEncoding=UTF-8
+    username: mnet_business
+    password: mnet@123
+    driver-class-name: com.mysql.jdbc.Driver
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  db1:
+    url: jdbc:mysql://10.10.214.67:3306/mnet?useUnicode=true&characterEncoding=UTF-8
+    username: mnet_business
+    password: mnet@123
+    driver-class-name: com.mysql.jdbc.Driver
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  es:
+  web:
+
+
+eurekaserver:
+  ip: 10.10.214.68
+  port: 9709

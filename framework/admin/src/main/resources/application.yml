@@ -1,0 +1,57 @@
+server:
+  port: 9820
+    
+logging: 
+  # 配置log4j2读取的配置文件
+  config: classpath:log4j2.yml
+  file: ../springlogs/adminserver.log
+
+
+spring:
+  application:
+    name: AdminServer
+  profiles:
+    active: "@profileActive@"
+  boot:
+    admin:
+      ui:
+        title: 服务监控中心
+  security:
+    user:
+      name: admin
+      password: admin
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${eureka.instance.hostname}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user:
+        name: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+  client:
+    registry-fetch-interval-seconds: 5
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #注册中心
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+  
+

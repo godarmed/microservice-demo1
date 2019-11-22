@@ -2,6 +2,7 @@ package com.godarmed.microservice.consumerdemo1.jpa_demo.config;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentityGenerator;
+import org.hibernate.id.UUIDGenerator;
 
 import java.io.Serializable;
 
@@ -12,14 +13,17 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2019-11-19
  */
-public class CustomIDGenerator extends IdentityGenerator {
+public class CustomIDGenerator extends UUIDGenerator {
+    final static String taskId = "Task_Id_Key";
+
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) {
-        SeqUtils seqUtils = new SeqUtils("Company_Key");
-
         //获取
-        String currentSeqId = seqUtils.getCurrentSeqId();
-        return super.generate(session, currentSeqId);
+        String currentSeqId = SeqUtils.getCurrentSeqId(taskId);
+        if (currentSeqId != null) {
+            return (Serializable)currentSeqId;
+        }
+        return super.generate(session, object);
     }
 
 

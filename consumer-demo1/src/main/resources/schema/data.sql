@@ -1,4 +1,4 @@
-INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (1, 'admin', 'mont@35441', NULL);
+/*INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (1, 'admin', 'mont@35441', NULL);
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (2, 'yunying1', 'mont@39341', NULL);
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (3, 'yunying2', 'mont@355441', NULL);
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (4, 'yunying3', 'mont@396441', NULL);
@@ -7,4 +7,4 @@ INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (7, 'yunying6', 'mont@379441', NULL);
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (8, 'yunying7', 'mont@3588241', NULL);
 INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (9, 'callback', 'mont@callback', NULL);
-INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (17, 'quickapp', 'mont@quickapp', NULL);
+INSERT INTO `serv_user_info` (`id`, `user_name`, `pass_word`, `mobile`) VALUES (17, 'quickapp', 'mont@quickapp', NULL);*/

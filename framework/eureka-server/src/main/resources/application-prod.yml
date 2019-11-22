@@ -1,0 +1,3 @@
+eurekaserver:
+  ip: 10.10.214.68
+  port: 9960

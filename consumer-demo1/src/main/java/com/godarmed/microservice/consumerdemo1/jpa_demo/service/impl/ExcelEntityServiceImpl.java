@@ -43,7 +43,7 @@ public class ExcelEntityServiceImpl implements ExcelEntityService {
     }
 
     @Override
-    public ExcelEntityTask queryExcelEntityTaskById(Long id) {
+    public ExcelEntityTask queryExcelEntityTaskById(String id) {
         return excelEntityTaskRepository.findById(id).get();
     }
 
@@ -77,7 +77,7 @@ public class ExcelEntityServiceImpl implements ExcelEntityService {
     }
 
     @Override
-    public Long deleteExcelEntityTask(long id) {
+    public String deleteExcelEntityTask(String id) {
         //查询
         if (excelEntityTaskRepository.existsById(id)) {
             excelEntityTaskRepository.deleteById(id);

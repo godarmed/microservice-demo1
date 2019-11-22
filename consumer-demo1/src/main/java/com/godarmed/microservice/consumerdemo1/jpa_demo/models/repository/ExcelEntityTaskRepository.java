@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExcelEntityTaskRepository extends JpaRepository<ExcelEntityTask, Long>, JpaSpecificationExecutor<ExcelEntityTask> {
+public interface ExcelEntityTaskRepository extends JpaRepository<ExcelEntityTask,String>, JpaSpecificationExecutor<ExcelEntityTask> {
 
 }

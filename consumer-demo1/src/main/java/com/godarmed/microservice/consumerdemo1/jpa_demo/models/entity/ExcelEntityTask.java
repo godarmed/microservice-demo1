@@ -3,6 +3,7 @@ package com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,8 +24,9 @@ public class ExcelEntityTask implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "myIdStrategy")
+	@GenericGenerator(name = "myIdStrategy", strategy = "com.godarmed.microservice.consumerdemo1.jpa_demo.config.CustomIDGenerator")
+    private String id;
 	
 	private String taskName;
 	

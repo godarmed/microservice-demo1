@@ -19,6 +19,8 @@
 		<module>system</module>
 		<module>redis</module>
 		<module>datasource</module>
+		<module>auth-server</module>
+		<module>auth-client</module>
 	</modules>
 
 	<properties>
@@ -78,6 +80,18 @@
 			<dependency>
 				<groupId>com.godarmed.core.starters</groupId>
 				<artifactId>datasource</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.godarmed.core.starters</groupId>
+				<artifactId>auth-server</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.godarmed.core.starters</groupId>
+				<artifactId>auth-client</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 <!--			<dependency>

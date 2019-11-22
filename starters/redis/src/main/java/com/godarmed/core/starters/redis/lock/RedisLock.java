@@ -14,7 +14,7 @@ public abstract class RedisLock {
     private String lockValue;
     private static final Long DEFAULT_LOCK_TIMEOUT = 300000L;
     private static final Long DEFAULT_ACQUIRE_TIMEOUT = 300000L;
-    private String locakName;
+    private String lockName;
     public static final String lockPrefix = "LOCK";
 
     public RedisLock(String lockName) throws Exception {
@@ -27,7 +27,7 @@ public abstract class RedisLock {
 
     public RedisLock(String lockName, RedisUtils redisUtils, RedisCustConfig redisCustConfig) throws Exception {
         this.lockValue = null;
-        this.locakName = null;
+        this.lockName = null;
         if (Strings.isNullOrEmpty(lockName)) {
             throw new Exception("init lock error for lockname is empty");
         } else {
@@ -35,7 +35,7 @@ public abstract class RedisLock {
                 log.debug("RedisLock begin to get instance");
             }
 
-            this.setLocakName("LOCK_" + lockName);
+            this.setLockName("LOCK_" + lockName);
             if (redisUtils != null) {
                 this.redisUtils = redisUtils;
             } else if (redisCustConfig != null) {
@@ -57,7 +57,7 @@ public abstract class RedisLock {
                 log.debug("acquireLock begin......");
             }
 
-            this.lockValue = this.redisUtils.getLock(this.locakName, lockTimeout == null ? DEFAULT_LOCK_TIMEOUT : lockTimeout, acquireTimeout == null ? DEFAULT_ACQUIRE_TIMEOUT : acquireTimeout);
+            this.lockValue = this.redisUtils.getLock(this.lockName, lockTimeout == null ? DEFAULT_LOCK_TIMEOUT : lockTimeout, acquireTimeout == null ? DEFAULT_ACQUIRE_TIMEOUT : acquireTimeout);
             if (this.lockValue != null) {
                 if (log.isDebugEnabled()) {
                     log.debug("acquireLock end......true");
@@ -79,7 +79,7 @@ public abstract class RedisLock {
     public final boolean refreshLock(int lockTimeout) {
         if (this.lockValue != null) {
             try {
-                this.redisUtils.set(this.locakName, this.lockValue, lockTimeout / 1000);
+                this.redisUtils.set(this.lockName, this.lockValue, lockTimeout / 1000);
                 return true;
             } catch (Exception var3) {
                 var3.printStackTrace();
@@ -97,7 +97,7 @@ public abstract class RedisLock {
     public final boolean releaseLock() {
         try {
             if (this.lockValue != null) {
-                return this.redisUtils.releaseLock(this.locakName, this.lockValue);
+                return this.redisUtils.releaseLock(this.lockName, this.lockValue);
             }
         } catch (Exception var2) {
             var2.printStackTrace();
@@ -114,7 +114,7 @@ public abstract class RedisLock {
 
     public final void close() {
         this.lockValue = null;
-        this.locakName = null;
+        this.lockName = null;
         if (this.redisUtils != null) {
             this.redisUtils.close();
         }
@@ -157,11 +157,11 @@ public abstract class RedisLock {
         this.sync((Long)null, (Long)null, context);
     }
 
-    public String getLocakName() {
-        return this.locakName;
+    public String getLockName() {
+        return this.lockName;
     }
 
-    public void setLocakName(String locakName) {
-        this.locakName = locakName;
+    public void setLockName(String lockName) {
+        this.lockName = lockName;
     }
 }

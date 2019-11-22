@@ -96,7 +96,7 @@ public class ExcelEntityController {
 
     //删除
     @RequestMapping("/deleteExcelTask")
-    public ResultModel<Long> deleteExcelEntityTask(@RequestBody BaseExcelEntityDTO baseDTO) {
+    public ResultModel<String> deleteExcelEntityTask(@RequestBody BaseExcelEntityDTO baseDTO) {
         //校验是否可以删除
         ExcelEntityTask excelEntityTask;
         try{
@@ -108,7 +108,7 @@ public class ExcelEntityController {
         if(pageBatchPorts==null || pageBatchPorts.size() < excelEntityTask.getTotal()){
             throw new RuntimeException("该任务未执行完,无法删除");
         }
-        ResultModel<Long> msgReturn = new ResultModel<>();
+        ResultModel<String> msgReturn = new ResultModel<>();
         try {
             msgReturn.setData(excelEntityService.deleteExcelEntityTask(baseDTO.getId()));
         }catch (Exception e){
@@ -124,7 +124,7 @@ public class ExcelEntityController {
     public ResultModel<Long> deleteExcelEntityTaskTest(@RequestBody BaseExcelEntityDTO baseDTO) {
         ResultModel<Long> msgReturn = new ResultModel<>();
         try {
-            msgReturn.setData(excelEntityService.deleteExcelEntityDetail(baseDTO.getId()));
+            msgReturn.setData(excelEntityService.deleteExcelEntityDetail(Long.valueOf(baseDTO.getId())));
         }catch (Exception e){
             msgReturn.setSubCode(500);
             msgReturn.setMessage("删除失败");
