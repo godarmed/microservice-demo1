@@ -42,6 +42,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     @Qualifier("clientUserDetailService")
     private UserDetailsService userDetailsService;
+
     @Autowired
     @Qualifier("clientCheckService")
     private ClientDetailsService customClientDetailsService;

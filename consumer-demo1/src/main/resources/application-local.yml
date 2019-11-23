@@ -24,7 +24,7 @@ custom:
     driver-class-name: com.mysql.jdbc.Driver
     database-platform: org.hibernate.dialect.MySQL5Dialect
   oauth:
-    ip: localhost:9820
+    ip: localhost:9840
     clientId: test
     clientSecret: 123456
   #文件上传配置，保存的路径

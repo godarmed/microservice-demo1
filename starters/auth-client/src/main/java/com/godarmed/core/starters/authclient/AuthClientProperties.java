@@ -12,10 +12,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 )
 @Data
 public class AuthClientProperties implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     private String ignoreUrl;
+
     @Value("${security.oauth2.resource.user-info-uri:/}")
     private String userService;
+
     @Value("${security.oauth2.client.clientId:resources}")
     private String clientId;
 

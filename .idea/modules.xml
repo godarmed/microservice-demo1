@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/framework/admin/admin.iml" filepath="$PROJECT_DIR$/framework/admin/admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/auth-client/auth-client.iml" filepath="$PROJECT_DIR$/starters/auth-client/auth-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/auth-server/auth-server.iml" filepath="$PROJECT_DIR$/starters/auth-server/auth-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/framework/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consumer-demo1/consumer-demo1.iml" filepath="$PROJECT_DIR$/consumer-demo1/consumer-demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/datasource/datasource.iml" filepath="$PROJECT_DIR$/starters/datasource/datasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/global/global.iml" filepath="$PROJECT_DIR$/starters/global/global.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/starters.iml" filepath="$PROJECT_DIR$/starters/starters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/system/system.iml" filepath="$PROJECT_DIR$/starters/system/system.iml" />
+    </modules>
+  </component>
+</project>
