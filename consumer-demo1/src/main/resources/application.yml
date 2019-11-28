@@ -156,7 +156,7 @@ security:
       grant-type: client_credentials,password,authorization_code,implicit,refresh_token
       pre-established-redirect-uri: http://baidu.com
       scope: all
-      ignoreUrl: /actuator/**,/validTest/**
+      ignoreUrl: /actuator/**,/validTest/**,/entityManagerTest/**
 
 swagger:
   enable: true

@@ -10,7 +10,7 @@ public class StringTemplate {
 
     public static final String template(String template, Object... args) {
         if (template != null && template.indexOf("{}") >= 0) {
-            if (template.equals("{}")) {
+            if ("{}".equals(template)) {
                 return args == null ? null : String.valueOf(args[0]);
             } else {
                 template = template + " ";

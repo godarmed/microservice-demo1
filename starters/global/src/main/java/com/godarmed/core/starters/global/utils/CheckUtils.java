@@ -10,7 +10,7 @@ public class CheckUtils {
     public static boolean isEmpty(Object obj) {
         if (obj == null) {
             return true;
-        } else if (obj instanceof String && obj.equals("")) {
+        } else if (obj instanceof String && "".equals(obj)) {
             return true;
         } else if (obj instanceof Map && ((Map)obj).isEmpty()) {
             return true;

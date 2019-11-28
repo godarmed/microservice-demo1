@@ -1,6 +1,7 @@
 package com.godarmed.core.framework.authservice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    @Qualifier("clientUserDetailService")
     UserDetailsService userDetailsService;
 
     /**

@@ -112,7 +112,7 @@ public class RedisUtils implements AutoCloseable {
     }
 
     private String createKey(String key) {
-        return this.config.getCacheKeyPrefix().equals("") ? key : this.config.getCacheKeyPrefix() + "_" + key;
+        return "".equals(this.config.getCacheKeyPrefix()) ? key : this.config.getCacheKeyPrefix() + "_" + key;
     }
 
     public void push(String key, String value) {

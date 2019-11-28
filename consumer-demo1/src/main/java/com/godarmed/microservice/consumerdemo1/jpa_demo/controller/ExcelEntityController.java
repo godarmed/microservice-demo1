@@ -79,7 +79,7 @@ public class ExcelEntityController {
         List<ExcelEntityDetail> pageBatchPorts = excelEntityTask.getExcelEntityDetailList();
         pageBatchPorts = pageBatchPorts.stream()
                 .map(item -> {     //计数并转换对象
-                    if (item.getStatus().equals("失败")) {
+                    if ("失败".equals(item.getStatus())) {
                         failureNum.addAndGet(1);
                     } else {
                         successNum.addAndGet(1);

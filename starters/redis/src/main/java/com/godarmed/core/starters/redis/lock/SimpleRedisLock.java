@@ -5,7 +5,7 @@ import com.godarmed.core.starters.redis.RedisUtils;
 
 import java.util.Map;
 
-public class SimpleRedisLock extends RedisLock {
+public class SimpleRedisLock extends AbstractRedisLock {
     public SimpleRedisLock(String lockName) throws Exception {
         super(lockName);
     }

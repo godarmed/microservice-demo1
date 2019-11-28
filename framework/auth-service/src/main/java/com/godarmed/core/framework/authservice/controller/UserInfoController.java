@@ -97,7 +97,7 @@ public class UserInfoController {
         return msgReturn;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = {Exception.class})
     @ApiOperation(value = "强制下线", httpMethod = "POST")
     @PostMapping(value = "/forceOffLine")
     public ResultModel<ServUserInfoVO> forceOffLine(@RequestBody ServUserInfoDTO servUserInfoDTO) {

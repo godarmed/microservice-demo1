@@ -112,7 +112,7 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = {Exception.class})
     public ServUserInfoVO addUserInfo(ServUserInfoDTO servUserInfoDTO) {
         ServUserInfo servUserInfo = new ServUserInfo();
         BeanUtils.copyProperties(servUserInfoDTO, servUserInfo);
@@ -148,8 +148,9 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
             List<AuthAccessToken> AuthUser = authAccessTokenRepository.findByUserName(item.getUserName());
             if (AuthUser.size() == 0 || item.getState() == null) {
                 item.setState("0");
-            } else
+            } else {
                 item.setState("1");
+            }
             servUserInfoRepository.save(item);
         }
 
@@ -181,12 +182,15 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
                 Class<?> type = entity.getType();
                 String fieldName = entity.getName();
                 Object value = entity.getValue();
-                if (excludes.get(0).contains(fieldName))
+                if (excludes.get(0).contains(fieldName)) {
                     break;
-                if (String.class.isAssignableFrom(type) && value != null && !value.equals(""))
+                }
+                if (String.class.isAssignableFrom(type) && value != null && !"".equals(value)) {
                     predicates.add(criteriaBuilder.like(root.get(fieldName), "%" + String.valueOf(value) + "%"));
-                if (Long.class.isAssignableFrom(type) && value != null)
+                }
+                if (Long.class.isAssignableFrom(type) && value != null) {
                     predicates.add(criteriaBuilder.equal(root.get(fieldName), (Long) value));
+                }
 
             }
         }
@@ -204,10 +208,11 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
             if (userInfo.isPresent() && userInfo.get() != null) {
                 BeanUtils.copyProperties(userInfo.get(), servUserInfoVO);
                 List<AuthAccessToken> authAccessToken = authAccessTokenRepository.findByUserName(userInfo.get().getUserName());
-                if (authAccessToken == null)
+                if (authAccessToken == null) {
                     servUserInfoVO.setState("0");
-                else
+                } else {
                     servUserInfoVO.setState("1");
+                }
             }
         }
         return servUserInfoVO;
@@ -240,10 +245,11 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
     public boolean CheckUsername(ServUserInfoDTO servUserInfoDTO) {
         // TODO Auto-generated method stub
         Optional<ServUserInfo> ServUserInfo = servUserInfoRepository.findByUserName(servUserInfoDTO.getUserName());
-        if (ServUserInfo.isPresent())
+        if (ServUserInfo.isPresent()) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     @Override
@@ -253,14 +259,15 @@ public class ServUserInfoServiceImpl implements ServUserInfoService {
         if (servUserInfoDTO.getUserName() != null && !"".equals(servUserInfoDTO.getUserName())) {
 
             List<AuthAccessToken> authUser = authAccessTokenRepository.findByUserName(servUserInfoDTO.getUserName());
-            if (authUser.size() == 0)
+            if (authUser.size() == 0) {
                 throw new BusiException(BusiEnum.USER_INVALID);
-            else if (authUser.size() >= 1) {
+            } else if (authUser.size() >= 1) {
                 for (int i = 0; i < authUser.size(); i++) {
                     authAccessTokenRepository.deleteById(authUser.get(i).getTokenId());
                 }
-            } else
+            } else {
                 throw new BusiException(BusiEnum.NOTDELETE);
+            }
 
             Optional<ServUserInfo> userInfo = servUserInfoRepository.findByUserName(servUserInfoDTO.getUserName());
             if (userInfo.isPresent()) {

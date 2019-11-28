@@ -3,6 +3,9 @@ package com.godarmed.core.starters.global.utils.security;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,7 +78,7 @@ public class SensitiveHandler {
                 if (oldNum != -1) {
                     totalPathName = totalPathName.replace(String.valueOf(oldNum), String.valueOf(i));
                 } else {
-                    totalPathName = totalPathName + "[" + i + "]";
+                    totalPathName = StringUtils.join(totalPathName,"[",i ,"]");
                 }
 
                 this.changeToMap(totalPathName, list.get(i));
@@ -89,7 +92,7 @@ public class SensitiveHandler {
                 if (oldKey != null) {
                     totalPathName = totalPathName.replace((String)oldKey, (String)k);
                 } else {
-                    totalPathName = totalPathName + "." + (String)k;
+                    totalPathName = StringUtils.join(totalPathName ,"." ,(String)k);
                 }
 
                 this.changeToMap(totalPathName, map.get(k));

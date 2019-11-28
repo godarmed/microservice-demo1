@@ -30,14 +30,17 @@ public class DataBaseNamingStrategy implements PhysicalNamingStrategy {
         }
     }
 
+    @Override
     public Identifier toPhysicalCatalogName(Identifier identifier, JdbcEnvironment jdbcEnvironment) {
         return this.proxy.toPhysicalCatalogName(identifier, jdbcEnvironment);
     }
 
+    @Override
     public Identifier toPhysicalSchemaName(Identifier identifier, JdbcEnvironment jdbcEnvironment) {
         return this.proxy.toPhysicalSchemaName(identifier, jdbcEnvironment);
     }
 
+    @Override
     public Identifier toPhysicalTableName(Identifier identifier, JdbcEnvironment jdbcEnvironment) {
         if (this.dataBaseProperties.getIsopen()) {
             identifier = Identifier.toIdentifier(this.dataBaseProperties.getPrefix() + this.addUnderscores(identifier.getText()));
@@ -46,10 +49,12 @@ public class DataBaseNamingStrategy implements PhysicalNamingStrategy {
         return this.proxy.toPhysicalTableName(identifier, jdbcEnvironment);
     }
 
+    @Override
     public Identifier toPhysicalSequenceName(Identifier identifier, JdbcEnvironment jdbcEnvironment) {
         return this.proxy.toPhysicalSequenceName(identifier, jdbcEnvironment);
     }
 
+    @Override
     public Identifier toPhysicalColumnName(Identifier identifier, JdbcEnvironment jdbcEnvironment) {
         return this.proxy.toPhysicalColumnName(identifier, jdbcEnvironment);
     }

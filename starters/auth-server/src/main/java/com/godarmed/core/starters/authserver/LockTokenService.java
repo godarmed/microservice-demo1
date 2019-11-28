@@ -50,7 +50,7 @@ public class LockTokenService implements AuthorizationServerTokenServices, Resou
         return this.proxyTokenService.readAccessToken(accessToken);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = {Exception.class})
     @Override
     public OAuth2AccessToken createAccessToken(OAuth2Authentication authentication) throws AuthenticationException {
         GodUserDetails user = (GodUserDetails) authentication.getPrincipal();

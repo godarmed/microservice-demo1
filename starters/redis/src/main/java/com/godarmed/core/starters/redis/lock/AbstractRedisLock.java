@@ -8,31 +8,31 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-public abstract class RedisLock {
-    private static final Logger log = LogManager.getLogger(RedisLock.class);
+public abstract class AbstractRedisLock {
+    private static final Logger log = LogManager.getLogger(AbstractRedisLock.class);
     private RedisUtils redisUtils;
     private String lockValue;
     private static final Long DEFAULT_LOCK_TIMEOUT = 300000L;
     private static final Long DEFAULT_ACQUIRE_TIMEOUT = 300000L;
     private String lockName;
-    public static final String lockPrefix = "LOCK";
+    public static final String LOCK_PREFIX = "LOCK";
 
-    public RedisLock(String lockName) throws Exception {
+    public AbstractRedisLock(String lockName) throws Exception {
         this(lockName, (RedisUtils)null);
     }
 
-    public RedisLock(String lockName, RedisUtils redisUtils) throws Exception {
+    public AbstractRedisLock(String lockName, RedisUtils redisUtils) throws Exception {
         this(lockName, redisUtils, (RedisCustConfig)null);
     }
 
-    public RedisLock(String lockName, RedisUtils redisUtils, RedisCustConfig redisCustConfig) throws Exception {
+    public AbstractRedisLock(String lockName, RedisUtils redisUtils, RedisCustConfig redisCustConfig) throws Exception {
         this.lockValue = null;
         this.lockName = null;
         if (Strings.isNullOrEmpty(lockName)) {
             throw new Exception("init lock error for lockname is empty");
         } else {
             if (log.isDebugEnabled()) {
-                log.debug("RedisLock begin to get instance");
+                log.debug("AbstractRedisLock begin to get instance");
             }
 
             this.setLockName("LOCK_" + lockName);
@@ -45,7 +45,7 @@ public abstract class RedisLock {
             }
 
             if (log.isDebugEnabled()) {
-                log.debug("RedisLock has successfull instance");
+                log.debug("AbstractRedisLock has successfull instance");
             }
 
         }
@@ -106,7 +106,7 @@ public abstract class RedisLock {
         return false;
     }
 
-    public final boolean releaseLockAndClose() {
+    public final Boolean releaseLockAndClose() {
         Boolean result = this.releaseLock();
         this.close();
         return result;

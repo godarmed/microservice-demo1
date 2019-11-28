@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -33,7 +34,11 @@ public class ExcelEntityTask implements Serializable{
 	@ApiModelProperty(value = "创建时间(第一次入库)")
 	@CreatedDate
     private Date createTime;
-	
+
+	@ApiModelProperty(value = "修改时间(最后一次次入库)")
+	@LastModifiedDate
+	private Date updateTime;
+
 	@ApiModelProperty(value = "操作人名称")
 	private String createName;
 	

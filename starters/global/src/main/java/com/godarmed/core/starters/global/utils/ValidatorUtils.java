@@ -18,7 +18,7 @@ public class ValidatorUtils {
     public static final <T> Map<String, String> valid(T obj) {
         Set<ConstraintViolation<T>> result = validator.validate(obj, new Class[]{Default.class});
         if (result != null && result.size() > 0) {
-            HashMap<String, String> errorMap = new HashMap();
+            HashMap<String, String> errorMap = new HashMap(result.size());
             String property = null;
             Iterator var4 = result.iterator();
 

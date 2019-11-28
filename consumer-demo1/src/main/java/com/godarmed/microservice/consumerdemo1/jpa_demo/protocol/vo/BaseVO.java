@@ -8,6 +8,6 @@ import java.io.Serializable;
 public abstract class BaseVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer page = 0;
-    private Integer size = 10;
+    private Integer page;
+    private Integer size;
 }
