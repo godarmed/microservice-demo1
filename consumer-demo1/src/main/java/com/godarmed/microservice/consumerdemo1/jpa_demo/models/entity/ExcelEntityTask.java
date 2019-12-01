@@ -27,13 +27,13 @@ public class ExcelEntityTask implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "myIdStrategy")
 	@GenericGenerator(name = "myIdStrategy", strategy = "com.godarmed.microservice.consumerdemo1.jpa_demo.config.CustomIDGenerator")
-    private String id;
-	
+	private String id;
+
 	private String taskName;
-	
+
 	@ApiModelProperty(value = "创建时间(第一次入库)")
 	@CreatedDate
-    private Date createTime;
+	private Date createTime;
 
 	@ApiModelProperty(value = "修改时间(最后一次次入库)")
 	@LastModifiedDate

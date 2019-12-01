@@ -91,7 +91,7 @@ public class SeqUtils {
 
     //补全位数,默认为四位，高位补零
     private static String fixSeqId(String source) {
-        return StringUtils.leftPad(source, 4, "0").toUpperCase();
+        return StringUtils.leftPad(source, 6, "0").toUpperCase();
     }
 
     //测试转换功能
