@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>com.godarmed.microservice</groupId>
-        <artifactId>demo</artifactId>
+        <artifactId>micro-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

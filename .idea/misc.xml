@@ -7,10 +7,12 @@
         <option value="$PROJECT_DIR$/starters/pom.xml" />
         <option value="$PROJECT_DIR$/framework/pom.xml" />
         <option value="$PROJECT_DIR$/starters/global/pom.xml" />
+        <option value="$PROJECT_DIR$/framework/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-demo/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="9.0" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
 </project>

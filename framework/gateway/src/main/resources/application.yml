@@ -1,0 +1,115 @@
+server:
+  port: 9830
+
+
+logging: 
+  config: classpath:log4j2.yml   # 配置log4j2读取的配置文件
+  file: ../springlogs/gateway.log
+
+spring:
+  profiles:
+    active: "@profileActive@"
+  application:
+    name: Gateway
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 3
+    host: ${custom.nosql.redis.host}
+    port: ${custom.nosql.redis.port}
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 1
+  rabbitmq:
+    addresses: ${custom.nosql.rabbitmq.addresses}
+    port: ${custom.nosql.rabbitmq.port}
+    username: ${custom.nosql.rabbitmq.username}
+    password: ${custom.nosql.rabbitmq.password}
+    virtualHost: /
+    requestedHeartbeat: 7200
+    queues:
+    - name: logger.persistence
+      exchange-name: topic.exchange
+      bind-name: logger.persistence
+    template:
+     replyTimeout: 500000
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+  cloud:
+    gateway:
+      httpclient:
+        ssl:
+          useInsecureTrustManager: true
+      open-path:
+        paths: /AuthService/oauth/token,/AuthService/oauth/authorize
+      routes:
+        # This route rule used to forward request to activity server
+      - id: AuthService
+        uri: lb://AUTHSERVICE
+        predicates:
+        - Path=/AuthService/**
+      - id: consumer-8100
+        uri: lb://CONSUMER-8100
+        predicates:
+        - Path=/consumer-8100/**
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #注册中心
+  instance:
+    lease-expiration-duration-in-seconds: 30 
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true
+    hostname: Gateway
+    instance-id: ${eureka.instance.hostname}:${spring.cloud.client.ip-address}:${server.port}
+    health-check-url-path: /actuator/health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+            ribbon:
+              ReadTimeout: 60000
+              ConnectTimeout: 20000
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+

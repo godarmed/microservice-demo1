@@ -10,7 +10,7 @@
 - 监控中心（v1.0）：Admin，默认端口：9820
 - API网关（v1.0）：Gateway，默认端口：9830
 - 授权模块（v1.0）：Auth-Service，默认端口：9840
-- 日志服务（v1.0）：Logger-Service，默认端口：9850
+- 日志服务（开发中）：Logger-Service，默认端口：9850
 - 字典服务（开发中）：Dictionary-Service，默认端口：9860
 - 图片服务（开发中）：Picture-Service，默认端口：9870
 
