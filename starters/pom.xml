@@ -21,6 +21,7 @@
 		<module>datasource</module>
 		<module>auth-server</module>
 		<module>auth-client</module>
+		<module>httpclient</module>
 	</modules>
 
 	<properties>
@@ -92,6 +93,12 @@
 			<dependency>
 				<groupId>com.godarmed.core.starters</groupId>
 				<artifactId>auth-client</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.godarmed.core.starters</groupId>
+				<artifactId>httpclient</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 <!--			<dependency>

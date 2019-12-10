@@ -126,6 +126,10 @@
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>auth-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.godarmed.core.starters</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
        <!-- <dependency>
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>rabbitmq</artifactId>
