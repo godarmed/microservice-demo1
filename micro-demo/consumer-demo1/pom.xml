@@ -130,10 +130,10 @@
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-       <!-- <dependency>
+        <dependency>
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>rabbitmq</artifactId>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <profiles>

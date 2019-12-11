@@ -17,11 +17,13 @@
 
 	<modules>
 		<module>system</module>
-		<module>redis</module>
 		<module>datasource</module>
+		<module>redis</module>
+		<module>rabbitmq</module>
 		<module>auth-server</module>
 		<module>auth-client</module>
 		<module>httpclient</module>
+		<module>logger-client</module>
 	</modules>
 
 	<properties>
@@ -75,6 +77,12 @@
 			<dependency>
 				<groupId>com.godarmed.core.starters</groupId>
 				<artifactId>redis</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.godarmed.core.starters</groupId>
+				<artifactId>rabbitmq</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 

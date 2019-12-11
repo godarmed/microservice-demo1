@@ -14,7 +14,10 @@
       <module fileurl="file://$PROJECT_DIR$/framework/gateway/gateway.iml" filepath="$PROJECT_DIR$/framework/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/global/global.iml" filepath="$PROJECT_DIR$/starters/global/global.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/httpclient/httpclient.iml" filepath="$PROJECT_DIR$/starters/httpclient/httpclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/logger-client/logger-client.iml" filepath="$PROJECT_DIR$/starters/logger-client/logger-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/logger-service/logger-service.iml" filepath="$PROJECT_DIR$/framework/logger-service/logger-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/micro-demo.iml" filepath="$PROJECT_DIR$/micro-demo/micro-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/starters.iml" filepath="$PROJECT_DIR$/starters/starters.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/system/system.iml" filepath="$PROJECT_DIR$/starters/system/system.iml" />

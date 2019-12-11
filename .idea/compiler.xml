@@ -16,6 +16,9 @@
         <module name="gateway" />
         <module name="global" />
         <module name="httpclient" />
+        <module name="logger-client" />
+        <module name="logger-service" />
+        <module name="rabbitmq" />
         <module name="redis" />
         <module name="system" />
       </profile>
@@ -33,7 +36,10 @@
       <module name="gateway" target="1.8" />
       <module name="global" target="1.8" />
       <module name="httpclient" target="1.8" />
+      <module name="logger-client" target="1.8" />
+      <module name="logger-service" target="1.8" />
       <module name="micro-demo" target="1.8" />
+      <module name="rabbitmq" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="starters" target="1.8" />
       <module name="system" target="1.8" />

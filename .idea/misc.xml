@@ -10,6 +10,9 @@
         <option value="$PROJECT_DIR$/framework/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/micro-demo/pom.xml" />
         <option value="$PROJECT_DIR$/starters/httpclient/pom.xml" />
+        <option value="$PROJECT_DIR$/starters/logger-client/pom.xml" />
+        <option value="$PROJECT_DIR$/starters/rabbitmq/pom.xml" />
+        <option value="$PROJECT_DIR$/framework/logger-service/pom.xml" />
       </list>
     </option>
   </component>

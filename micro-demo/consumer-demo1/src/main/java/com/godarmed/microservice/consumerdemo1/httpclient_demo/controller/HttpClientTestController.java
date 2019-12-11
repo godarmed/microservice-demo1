@@ -23,7 +23,7 @@ public class HttpClientTestController {
         Map<String,Object> headers=new HashMap<String,Object>();
         Object request = JSON.parseObject("{}");
         ResponseEntity<String> response = null;
-        response = httpService.post("http://localhost:9820/login?logoutusername=admin&password=admin", headers, request, String.class);
+        response = httpService.post("http://192.168.164.1:9820/instances/70968b29d54b/actuator/logfile", headers, request, String.class);
         log.info(JSON.toJSONString(response));
         return response;
     }

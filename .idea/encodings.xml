@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/framework/auth-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/framework/eureka-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/framework/gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/framework/logger-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/micro-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/micro-demo/consumer-demo1" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starters" charset="UTF-8" />
@@ -15,6 +16,8 @@
     <file url="file://$PROJECT_DIR$/starters/datasource" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starters/global" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starters/httpclient" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/starters/logger-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/starters/rabbitmq" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starters/redis" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starters/system" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
