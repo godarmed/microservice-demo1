@@ -15,8 +15,8 @@ import reactor.core.publisher.Mono;
 
 /**
  * 解决跨域问题
- * @author Administrator
  *
+ * @author Administrator
  */
 @Configuration
 public class RouteConfiguration {
