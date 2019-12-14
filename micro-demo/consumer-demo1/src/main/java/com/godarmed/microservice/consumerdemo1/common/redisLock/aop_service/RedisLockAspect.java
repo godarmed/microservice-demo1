@@ -1,10 +1,14 @@
 package com.godarmed.microservice.consumerdemo1.common.redisLock.aop_service;
 
 import com.alibaba.fastjson.JSON;
+import com.godarmed.core.starters.global.entity.HeaderEntity;
+import com.godarmed.core.starters.global.entity.HttpMessage;
+import com.godarmed.core.starters.loggerclient.annotation.RequestStart;
 import com.godarmed.core.starters.redis.RedisUtils;
 import com.godarmed.microservice.consumerdemo1.common.redisLock.annotation.RedisLock;
 import com.godarmed.microservice.consumerdemo1.common.timeLog.aop_service.LogAspect;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -12,10 +16,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Aspect
 @Component("RedisLockAspect")
@@ -24,7 +37,7 @@ public class RedisLockAspect {
 
     private static final ThreadLocal<String> LOCK_NAME = new NamedThreadLocal<String>("lock name");
 
-    private static final ThreadLocal<Integer> LOCK_TIMEOUT = new NamedThreadLocal<Integer>("lock timeout");
+    private static final ThreadLocal<Long> LOCK_TIMEOUT = new NamedThreadLocal<Long>("lock timeout");
 
     private static final ThreadLocal<String> CLASS_NAME = new NamedThreadLocal<String>("class name");
 
@@ -35,61 +48,33 @@ public class RedisLockAspect {
     //织入点
     @Pointcut("@within(com.godarmed.microservice.consumerdemo1.common.redisLock.annotation.RedisLock)" +
             "||@annotation(com.godarmed.microservice.consumerdemo1.common.redisLock.annotation.RedisLock)")
-    public void logPointCut() {
+    public void redisPointCut() {
     }
 
-    /**
-     * 前置通知 用于拦截操作,在方法返回后执行
-     */
-    @Before(value = "logPointCut()")
-    public void doBefore(JoinPoint joinPoint) throws Exception {
-        doBeforeMethod(joinPoint);
-
+    @Around("redisPointCut() && @annotation(annotation)")
+    public Object Interceptor(ProceedingJoinPoint proceedingJoinPoint, RedisLock annotation) throws Throwable {
+        doBeforeMethod(proceedingJoinPoint);
+        Object response = null;
         RedisUtils redisUtils = null;
         try {
             redisUtils = new RedisUtils();
             //获取锁
-            String lock = redisUtils.get(LOCK_NAME.get());
-            if (lock != null && !"100".equals(lock)) {
-                throw new RuntimeException("当前任务正在运行中");
+            String requestId = redisUtils.getLock(LOCK_NAME.get(),LOCK_TIMEOUT.get(),0L);
+            if(requestId==null){
+                throw new RuntimeException(METHOD_NAME+"获取锁失败");
             }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            if (redisUtils != null) {
+            response = proceedingJoinPoint.proceed();
+            //释放锁
+            redisUtils.releaseLock(LOCK_NAME.get(),requestId);
+        } catch (Throwable e) {
+            log.info(e.getMessage());
+        }finally {
+            doAfterMethod();
+            if(redisUtils!=null){
                 redisUtils.close();
             }
         }
-        //获取启动时间,当前类和当前方法
-        log.info("[前置通知][{}]类中的[{}]方法启动,\n其入参为[{}]", CLASS_NAME.get(), METHOD_NAME.get(), ARGS.get());
-    }
-
-    /**
-     * 后置通知 用于拦截操作,在方法返回后执行（先于返回通知或者返回异常通知）
-     */
-    @After(value = "logPointCut()")
-    public void doAfter(JoinPoint joinPoint) {
-        log.info("[后置通知]:[{}]类中的[{}]方法结束", CLASS_NAME.get(), METHOD_NAME.get());
-    }
-
-    /**
-     * 返回通知 用于拦截操作,在方法返回后执行
-     */
-    @SuppressWarnings("unchecked")
-    @AfterReturning(value = "logPointCut()", argNames = "joinPoint,result", returning = "result")
-    public void doAfterReturn(JoinPoint joinPoint, Object result) {
-        //Object[] object = joinPoint.getArgs();
-        //log.info("[返回通知]:[{}]类中的[{}]方法的返回为[{}]", CLASS_NAME.get(), METHOD_NAME.get(), JSON.toJSONString(result));
-        doAfterMethod();
-    }
-
-    /**
-     * 后置异常通知 用于拦截操作,在方法出现异常后执行
-     */
-    @AfterThrowing(value = "logPointCut()", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
-        log.info("[后置异常通知]:[{}]类中的[{}]方法产生异常[{}]", CLASS_NAME.get(), METHOD_NAME.get(), e.getCause());
-        doAfterMethod();
+        return response;
     }
 
     /**
@@ -159,20 +144,21 @@ public class RedisLockAspect {
      * PS:因为直接获取的是代理类，需要获取实际类型的
      */
     private String getRealClass(JoinPoint joinPoint) {
-        String CLASS_NAME = joinPoint.getTarget().getClass().getName();
-        if (CLASS_NAME.indexOf("com.sun.proxy.$Proxy") != -1) {   //如果是代理类
+        String className = joinPoint.getTarget().getClass().getName();
+        //如果是代理类
+        if (className.contains("com.sun.proxy.$Proxy")) {
             //查看有无继承的父类
             Type[] interfaces = joinPoint.getTarget().getClass().getGenericInterfaces();
             if (interfaces.length > 0) {
-                CLASS_NAME = interfaces[0].getTypeName();
+                className = interfaces[0].getTypeName();
             } else {
                 //查看有无实现的接口
                 Type superClass = joinPoint.getTarget().getClass().getGenericSuperclass();
                 if (superClass != null) {
-                    CLASS_NAME = superClass.getTypeName();
+                    className = superClass.getTypeName();
                 }
             }
         }
-        return CLASS_NAME;
+        return className;
     }
 }

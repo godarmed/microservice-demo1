@@ -134,6 +134,10 @@
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>rabbitmq</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.godarmed.core.starters</groupId>
+            <artifactId>loggerclient</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>
