@@ -1,14 +1,16 @@
 package com.godarmed.microservice.consumerdemo1.redisLock_demo.controller;
 
 import com.godarmed.core.starters.redis.RedisUtils;
-import com.godarmed.microservice.consumerdemo1.common.redisLock.annotation.RedisLock;
+import com.godarmed.core.starters.redis.lock.annotation.RedisLock;
+import com.godarmed.core.starters.redis.lock.annotation.RedisLockName;
+import com.godarmed.core.starters.redis.lock.annotation.RedisLockTimeOut;
+import com.godarmed.core.starters.redis.lock.annotation.RedisLockWaitTime;
+import com.godarmed.microservice.consumerdemo1.common.protocol.vo.RequestMsg;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 @Log4j2
 @RequestMapping("/redisTest")
@@ -23,7 +25,7 @@ public class RedisLockTestController {
     public void redisLock(Integer threadNum) {
         commonValue = 0;
         for (int i = 0; i < threadNum; i++) {
-            ((RedisLockTestController)AopContext.currentProxy()).methodWithLock();
+            ((RedisLockTestController)AopContext.currentProxy()).methodWithLockTest("aaa",null,5000L);
         }
     }
 
@@ -35,9 +37,9 @@ public class RedisLockTestController {
         }
     }
 
-    @RedisLock(lockName = LOCK_KEY,lockTimeout = 1*60*1000)
+    @RedisLock(lockName = LOCK_KEY,lockTimeout = 1*60*1000,waitTimeout = 0L)
     @Async
-    public void methodWithLockTest(){
+    public void methodWithLockTest(@RedisLockName String lockName, @RedisLockTimeOut Long lockTime, @RedisLockWaitTime Long waitTime){
         //=======任务内容======
         commonValue++;
         log.info("执行任务[{}],当前值[{}]",Thread.currentThread().getName(),commonValue);
@@ -59,7 +61,7 @@ public class RedisLockTestController {
             //=======任务内容======
             commonValue++;
             log.info("执行任务[{}],当前值[{}]",Thread.currentThread().getName(),commonValue);
-            Thread.sleep(60*1000L);
+            //Thread.sleep(60*1000L);
             commonValue--;
             //=======任务内容======
 

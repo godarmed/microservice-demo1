@@ -1,10 +1,9 @@
 package com.godarmed.microservice.consumerdemo1.excel_demo.controller;
 
-import com.godarmed.core.starters.authclient.UserManager;
 import com.godarmed.core.starters.global.entity.ResultModel;
 import com.godarmed.core.starters.global.utils.excel.excel.ExcelUtil;
 import com.godarmed.core.starters.redis.RedisUtils;
-import com.godarmed.microservice.consumerdemo1.common.redisLock.annotation.RedisLock;
+import com.godarmed.core.starters.redis.lock.annotation.RedisLock;
 import com.godarmed.microservice.consumerdemo1.excel_demo.entity.ExportExcelEntityTask;
 import com.godarmed.microservice.consumerdemo1.excel_demo.utils.ExcelHelper;
 import com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity.ExcelEntityTask;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
