@@ -1,10 +1,12 @@
 package com.godarmed.microservice.consumerdemo1.validater_demo.controller;
 
 import com.godarmed.core.starters.global.entity.ResultModel;
+import com.godarmed.core.starters.loggerclient.annotation.RequestStart;
 import com.godarmed.microservice.consumerdemo1.validater_demo.protocol.dto.PersonDTO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/validTest")
 public class ValidaterTestController {
 
+    @RequestStart
     @RequestMapping("/add")
     public ResultModel add(@RequestBody @Validated({PersonDTO.AddPersonGroup.class}) PersonDTO personDTO) {
         ResultModel resultModel = new ResultModel();

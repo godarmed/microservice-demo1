@@ -14,7 +14,7 @@ public @interface RedisLock {
     /**
      * 锁过期时间
      */
-    int lockTimeout() default 300;
+    long lockTimeout() default 300L;
 
 
 }
