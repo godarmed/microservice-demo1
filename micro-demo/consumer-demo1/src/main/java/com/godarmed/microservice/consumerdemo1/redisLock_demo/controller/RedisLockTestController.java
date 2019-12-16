@@ -1,6 +1,7 @@
 package com.godarmed.microservice.consumerdemo1.redisLock_demo.controller;
 
 import com.godarmed.core.starters.redis.RedisUtils;
+import com.godarmed.core.starters.redis.lock.RLockHandler;
 import com.godarmed.core.starters.redis.lock.annotation.RedisLock;
 import com.godarmed.core.starters.redis.lock.annotation.RedisLockName;
 import com.godarmed.core.starters.redis.lock.annotation.RedisLockTimeOut;
@@ -25,7 +26,7 @@ public class RedisLockTestController {
     public void redisLock(Integer threadNum) {
         commonValue = 0;
         for (int i = 0; i < threadNum; i++) {
-            ((RedisLockTestController)AopContext.currentProxy()).methodWithLockTest("aaa",null,5000L);
+            ((RedisLockTestController)AopContext.currentProxy()).methodWithRLock();
         }
     }
 
@@ -45,6 +46,29 @@ public class RedisLockTestController {
         log.info("执行任务[{}],当前值[{}]",Thread.currentThread().getName(),commonValue);
         commonValue--;
         //=======任务内容======
+    }
+
+    @Async("taskExecutor")
+    public void methodWithRLock(){
+        try{
+            //此操作是互斥的，同一时刻仅有一个持有者
+            if(!RLockHandler.acquire(LOCK_KEY,1*60)){
+                throw new RuntimeException("获取锁失败");
+            }
+
+            //=======任务内容======
+            commonValue++;
+            log.info("执行任务[{}],当前值[{}]",Thread.currentThread().getName(),commonValue);
+            //Thread.sleep(60*1000L);
+            commonValue--;
+            //=======任务内容======
+
+
+        } catch (Exception e) {
+            log.info("执行任务[{}]出错,出错原因[{}]",Thread.currentThread().getName(),e.getMessage());
+        }finally {
+            RLockHandler.release(LOCK_KEY);
+        }
     }
 
     @Async
