@@ -138,6 +138,10 @@
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>loggerclient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>
