@@ -6,21 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="auth-service" />
-        <module name="httpclient" />
-        <module name="redis" />
-        <module name="consumer-demo1" />
-        <module name="gateway" />
-        <module name="global (1)" />
-        <module name="datasource" />
-        <module name="auth-server" />
-        <module name="auth-client" />
-        <module name="rabbitmq" />
-        <module name="logger-client" />
-        <module name="eureka-server" />
         <module name="admin" />
-        <module name="logger-service" />
+        <module name="auth-client" />
+        <module name="auth-server" />
+        <module name="auth-service" />
+        <module name="consumer-demo1" />
+        <module name="datasource" />
+        <module name="eureka-server" />
+        <module name="feign-wrapper" />
+        <module name="gateway" />
         <module name="global" />
+        <module name="global (1)" />
+        <module name="httpclient" />
+        <module name="logger-client" />
+        <module name="logger-service" />
+        <module name="providerdemo1" />
+        <module name="rabbitmq" />
+        <module name="redis" />
         <module name="system" />
       </profile>
     </annotationProcessing>
@@ -33,6 +35,7 @@
       <module name="datasource" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="eureka-server" target="1.8" />
+      <module name="feign-wrapper" target="1.8" />
       <module name="framework" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="global" target="1.8" />
@@ -41,6 +44,8 @@
       <module name="logger-client" target="1.8" />
       <module name="logger-service" target="1.8" />
       <module name="micro-demo" target="1.8" />
+      <module name="protocol" target="1.8" />
+      <module name="providerdemo1" target="1.8" />
       <module name="rabbitmq" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="starters" target="1.8" />

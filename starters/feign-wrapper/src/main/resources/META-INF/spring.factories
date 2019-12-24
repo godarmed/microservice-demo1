@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.godarmed.core.starters.feignwrapper.config.FeignBeanFactoryPostProcessor,\
+com.godarmed.core.starters.feignwrapper.logger.impl.DefaultLogRecordServiceImpl,\
+com.godarmed.core.starters.feignwrapper.FeignBuilderService,\
+com.godarmed.core.starters.feignwrapper.FeignClientFactory,\
+com.godarmed.core.starters.feignwrapper.FeignExceptionHandler

@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages = {"com.godarmed.core.starters.*","com.godarmed.microservice.consumerdemo1"})
+@SpringBootApplication
 @EnableEurekaClient
 @EnableSwagger2
 @EnableCaching

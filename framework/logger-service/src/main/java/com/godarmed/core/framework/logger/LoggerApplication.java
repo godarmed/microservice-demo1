@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@SpringBootApplication(scanBasePackages = {"com.godarmed.core.starters.rabbitmq.**","com.godarmed.core.framework.logger.**"})
+@SpringBootApplication
 @EnableEurekaClient
 @EnableJpaAuditing
 public class LoggerApplication {

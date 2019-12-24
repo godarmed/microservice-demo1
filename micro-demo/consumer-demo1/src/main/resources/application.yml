@@ -204,15 +204,3 @@ ribbon:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mapper/*Mapper.xml
-
-
-
-remote:
-  feign:
-    hwserver:
-      name: HwService
-      addPort: /HwService/port/addPort
-      addPubServer: /HwService/pubservice/add
-      updatePubServer: /HwService/pubservice/update
-      getPubServer: /HwService/pubservice/get
-      queryPubServer: /HwService/pubservice/query

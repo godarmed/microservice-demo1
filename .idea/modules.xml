@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/starters/datasource/datasource.iml" filepath="$PROJECT_DIR$/starters/datasource/datasource.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starters/feign-wrapper/feign-wrapper.iml" filepath="$PROJECT_DIR$/starters/feign-wrapper/feign-wrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/gateway/gateway.iml" filepath="$PROJECT_DIR$/framework/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/global/global.iml" filepath="$PROJECT_DIR$/starters/global/global.iml" />
@@ -18,6 +19,8 @@
       <module fileurl="file://$PROJECT_DIR$/starters/logger-client/logger-client.iml" filepath="$PROJECT_DIR$/starters/logger-client/logger-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/logger-service/logger-service.iml" filepath="$PROJECT_DIR$/framework/logger-service/logger-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/micro-demo.iml" filepath="$PROJECT_DIR$/micro-demo/micro-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-demo/protocol/protocol.iml" filepath="$PROJECT_DIR$/micro-demo/protocol/protocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" filepath="$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/starters.iml" filepath="$PROJECT_DIR$/starters/starters.iml" />

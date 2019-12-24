@@ -39,7 +39,7 @@ public class RedisLockTestController {
         }
     }
 
-    @Async("taskExecutor")
+    @Async
     public void methodWithRLock(){
         RLockHandler rLockHandler = null;
         try{

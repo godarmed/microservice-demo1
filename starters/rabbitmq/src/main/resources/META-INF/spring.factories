@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.godarmed.core.starters.rabbitmq.RabbitMQConfig,\
+com.godarmed.core.starters.rabbitmq.rpc.client.Client,\
+com.godarmed.core.starters.rabbitmq.service.impl.MqServiceImpl

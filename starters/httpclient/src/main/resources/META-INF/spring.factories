@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.godarmed.core.starters.httpclient.HttpClientConfig,\
+com.godarmed.core.starters.httpclient.HttpService

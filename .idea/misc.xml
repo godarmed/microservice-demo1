@@ -13,6 +13,9 @@
         <option value="$PROJECT_DIR$/starters/logger-client/pom.xml" />
         <option value="$PROJECT_DIR$/starters/rabbitmq/pom.xml" />
         <option value="$PROJECT_DIR$/framework/logger-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-demo/providerdemo1/pom.xml" />
+        <option value="$PROJECT_DIR$/starters/feign-wrapper/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-demo/protocol/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,12 +1,16 @@
 package com.godarmed.microservice.consumerdemo1.common.config;
 
+import com.godarmed.microservice.consumerdemo1.async_demo.config.VisiableThreadPoolTaskExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskDecorator;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -43,7 +47,7 @@ public class ThreadPoolConfiguration implements AsyncConfigurer {
     @Bean("taskExecutor")
     @Override
     public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        ThreadPoolTaskExecutor taskExecutor = new VisiableThreadPoolTaskExecutor();
         //最大线程数：线程池最大的线程数，只有在缓冲队列满了之后才会申请超过核心线程数的线程
         taskExecutor.setMaxPoolSize(maxPoolSize);
         //核心线程数：线程池创建时候初始化的线程数
@@ -116,6 +120,24 @@ public class ThreadPoolConfiguration implements AsyncConfigurer {
                     RequestContextHolder.resetRequestAttributes();
                 }
             };
+        }
+    }
+
+    @Autowired
+    @Qualifier("taskExecutor")
+    Executor asyncServiceExecutor;
+
+    public void changeCorePoolSize(Integer corePoolSize){
+        ThreadPoolTaskExecutor threadPoolExecutor = (ThreadPoolTaskExecutor)asyncServiceExecutor;
+        if(corePoolSize <= threadPoolExecutor.getMaxPoolSize()){
+            threadPoolExecutor.setCorePoolSize(corePoolSize);
+        }
+    }
+
+    public void changeMaxPoolSize(Integer maxPoolSize){
+        ThreadPoolTaskExecutor threadPoolExecutor = (ThreadPoolTaskExecutor)asyncServiceExecutor;
+        if(maxPoolSize >= threadPoolExecutor.getCorePoolSize()){
+            threadPoolExecutor.setMaxPoolSize(maxPoolSize);
         }
     }
 }

@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.godarmed.core.starters.authserver.impl.DefaultClientServiceImpl,\
+com.godarmed.core.starters.authserver.ClientCheckService,\
+com.godarmed.core.starters.authserver.ClientUserDetailService,\
+com.godarmed.core.starters.authserver.AuthServerConfig

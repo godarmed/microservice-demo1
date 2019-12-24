@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.godarmed.core.starters.authclient.ResourceServerConfigurer,\
+com.godarmed.core.starters.authclient.UserManager
