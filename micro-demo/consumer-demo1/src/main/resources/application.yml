@@ -49,6 +49,7 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 1
+    timeout: 3000
   zipkin:
     base-url: http://localhost:9411
   sleuth:
@@ -156,7 +157,7 @@ security:
       grant-type: client_credentials,password,authorization_code,implicit,refresh_token
       pre-established-redirect-uri: http://baidu.com
       scope: all
-      ignoreUrl: /actuator/**,/validTest/**,/entityManagerTest/**,/*Test/**
+      ignoreUrl: /actuator/**,/validTest/**,/entityManagerTest/**,/*Test/**,/redisTest/redisLock
 
 swagger:
   enable: true

@@ -13,7 +13,6 @@ import com.godarmed.core.starters.feignwrapper.targets.DefaultDynamicTarget;
 import com.godarmed.core.starters.global.entity.ReflexEntity;
 import com.godarmed.core.starters.global.utils.ReflexUtils;
 import com.godarmed.core.starters.global.utils.SpringUtils;
-import com.godarmed.core.starters.rabbitmq.rpc.client.Client;
 import com.google.common.base.Strings;
 import feign.*;
 import feign.Feign.Builder;
@@ -126,7 +125,7 @@ public class FeignBuilder<T> {
         String[] var2 = needCopyHeaders;
         int var3 = needCopyHeaders.length;
 
-        for(int var4 = 0; var4 < var3; ++var4) {
+        for (int var4 = 0; var4 < var3; ++var4) {
             String header = var2[var4];
             this.inheritHeaders.add(header);
         }
@@ -143,8 +142,8 @@ public class FeignBuilder<T> {
         if (needCopyHeaders != null) {
             Iterator var2 = needCopyHeaders.iterator();
 
-            while(var2.hasNext()) {
-                String header = (String)var2.next();
+            while (var2.hasNext()) {
+                String header = (String) var2.next();
                 if (!this.inheritHeaders.contains(header)) {
                     this.inheritHeaders.add(header);
                 }
@@ -169,8 +168,8 @@ public class FeignBuilder<T> {
             Set<String> keys = staticHeaders.keySet();
             Iterator var3 = keys.iterator();
 
-            while(var3.hasNext()) {
-                String key = (String)var3.next();
+            while (var3.hasNext()) {
+                String key = (String) var3.next();
                 this.staticHeaders.put(key, staticHeaders.get(key));
             }
         }
@@ -184,8 +183,8 @@ public class FeignBuilder<T> {
         List<ReflexEntity> entities = ReflexUtils.reflex2Entity(this);
         Iterator var3 = entities.iterator();
 
-        while(var3.hasNext()) {
-            ReflexEntity entity = (ReflexEntity)var3.next();
+        while (var3.hasNext()) {
+            ReflexEntity entity = (ReflexEntity) var3.next();
             if (defaultInitnames.contains(entity.getName())) {
                 this.setValue(entity.getName(), this.getDefaultBean(entity.getValue(), entity.getType()));
             }
@@ -203,19 +202,19 @@ public class FeignBuilder<T> {
     }
 
     private void parseConfig() {
-        this.config = (FeignProperties)this.getDefaultBean((Object)null, FeignProperties.class);
+        this.config = (FeignProperties) this.getDefaultBean((Object) null, FeignProperties.class);
         if (this.config != null && this.config.getClients() != null && !this.config.getClients().isEmpty() && (this.retryer == null || this.options == null)) {
             Map<String, FeignConfig> clientConfigs = this.transList2MapConfig(this.config.getClients());
             FeignConfig validConfig = null;
             if (clientConfigs.containsKey("default")) {
-                validConfig = (FeignConfig)clientConfigs.get("default");
+                validConfig = (FeignConfig) clientConfigs.get("default");
             }
 
             String serviceName = this.getServiceFromClient();
             if (clientConfigs.containsKey(serviceName)) {
-                validConfig = (FeignConfig)clientConfigs.get(serviceName);
+                validConfig = (FeignConfig) clientConfigs.get(serviceName);
             } else if (clientConfigs.containsKey(this.targetClient.getSimpleName())) {
-                validConfig = (FeignConfig)clientConfigs.get(this.targetClient.getSimpleName());
+                validConfig = (FeignConfig) clientConfigs.get(this.targetClient.getSimpleName());
             }
 
             if (validConfig != null) {
@@ -230,8 +229,8 @@ public class FeignBuilder<T> {
         Map<String, FeignConfig> mapConfog = new HashMap();
         Iterator var3 = configs.iterator();
 
-        while(var3.hasNext()) {
-            FeignConfig configItem = (FeignConfig)var3.next();
+        while (var3.hasNext()) {
+            FeignConfig configItem = (FeignConfig) var3.next();
             mapConfog.put(Strings.isNullOrEmpty(configItem.getServiceName()) ? configItem.getClassName() : configItem.getServiceName(), configItem);
         }
 
@@ -254,7 +253,7 @@ public class FeignBuilder<T> {
 
     private feign.Logger getLogger() {
         if (this.logger == null) {
-            this.loggerRecordService = this.loggerRecordService == null ? (LoggerRecordService)SpringUtils.getBean(LoggerRecordService.class) : this.loggerRecordService;
+            this.loggerRecordService = this.loggerRecordService == null ? (LoggerRecordService) SpringUtils.getBean(LoggerRecordService.class) : this.loggerRecordService;
             return new Slf4jRecordLogger(this.targetClient, this.loggerRecordService);
         } else {
             return this.logger;
@@ -266,7 +265,7 @@ public class FeignBuilder<T> {
             Field[] var3 = this.fs;
             int var4 = var3.length;
 
-            for(int var5 = 0; var5 < var4; ++var5) {
+            for (int var5 = 0; var5 < var4; ++var5) {
                 Field field = var3[var5];
                 if (field.getName().equals(fieldName)) {
                     field.set(this, value);
@@ -295,7 +294,7 @@ public class FeignBuilder<T> {
     public T toDefaultClient() throws FeignClientCreateException {
         try {
             Builder builder = this.generatorBuilder();
-            return builder instanceof feign.hystrix.HystrixFeign.Builder ? ((feign.hystrix.HystrixFeign.Builder)builder).target(this.builderTarget((String)null), (T) new DefaultFallback(this.targetClient)) : builder.target(this.builderTarget((String)null));
+            return builder instanceof feign.hystrix.HystrixFeign.Builder ? ((feign.hystrix.HystrixFeign.Builder) builder).target(this.builderTarget((String) null), (T) new DefaultFallback(this.targetClient)) : builder.target(this.builderTarget((String) null));
         } catch (Exception var2) {
             var2.printStackTrace();
             throw new FeignClientCreateException(var2.getMessage());
@@ -305,8 +304,8 @@ public class FeignBuilder<T> {
     public T toDefaultClient(String serviceName) throws FeignClientCreateException {
         try {
             Builder builder = this.generatorBuilder();
-            this.fallbackFactory = (FallbackFactory)(this.fallbackFactory != null ? this.fallbackFactory : new DefaultFallback(this.targetClient));
-            return builder instanceof feign.hystrix.HystrixFeign.Builder ? ((feign.hystrix.HystrixFeign.Builder)builder).target(this.builderTarget(serviceName), this.fallbackFactory) : builder.target(this.builderTarget(serviceName));
+            this.fallbackFactory = (FallbackFactory) (this.fallbackFactory != null ? this.fallbackFactory : new DefaultFallback(this.targetClient));
+            return builder instanceof feign.hystrix.HystrixFeign.Builder ? ((feign.hystrix.HystrixFeign.Builder) builder).target(this.builderTarget(serviceName), this.fallbackFactory) : builder.target(this.builderTarget(serviceName));
         } catch (Exception var3) {
             var3.printStackTrace();
             throw new FeignClientCreateException(var3.getMessage());

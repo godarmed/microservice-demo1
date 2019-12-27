@@ -77,5 +77,6 @@
     <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.0.7" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.3" level="project" />
   </component>
 </module>

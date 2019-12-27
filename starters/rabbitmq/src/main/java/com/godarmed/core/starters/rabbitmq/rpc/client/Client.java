@@ -17,6 +17,7 @@ public class Client {
     private AmqpTemplate rabbitTemplate;
 
     public Client() {
+        System.out.println("client start");
     }
 
     public String getResultFromPython(RPCRequest<?> req, String queue) {

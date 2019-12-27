@@ -141,6 +141,11 @@
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 		</dependency>
+		<!--feign协议-->
+		<dependency>
+			<groupId>com.godarmed.microservice.protocol</groupId>
+			<artifactId>feigntest-protocol</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>

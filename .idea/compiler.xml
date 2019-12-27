@@ -14,6 +14,7 @@
         <module name="datasource" />
         <module name="eureka-server" />
         <module name="feign-wrapper" />
+        <module name="feigntest-protocol" />
         <module name="gateway" />
         <module name="global" />
         <module name="global (1)" />
@@ -36,6 +37,7 @@
       <module name="demo" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="feign-wrapper" target="1.8" />
+      <module name="feigntest-protocol" target="1.8" />
       <module name="framework" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="global" target="1.8" />

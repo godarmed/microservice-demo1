@@ -83,6 +83,12 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.3</version>
+		</dependency>
 	</dependencies>
 
 
@@ -237,6 +243,14 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.godarmed.microservice.protocol</groupId>
+				<artifactId>protocol</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-all</artifactId>
 				<version>5.0.7</version>
@@ -246,6 +260,12 @@
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
 				<version>1.4.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>3.3.3</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

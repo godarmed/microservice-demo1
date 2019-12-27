@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/micro-demo/providerdemo1/pom.xml" />
         <option value="$PROJECT_DIR$/starters/feign-wrapper/pom.xml" />
         <option value="$PROJECT_DIR$/micro-demo/protocol/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-demo/protocol/feigntest-protocol/pom.xml" />
       </list>
     </option>
   </component>

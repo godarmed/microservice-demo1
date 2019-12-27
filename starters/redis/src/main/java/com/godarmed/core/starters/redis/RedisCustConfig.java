@@ -58,7 +58,7 @@ public class RedisCustConfig extends CachingConfigurerSupport {
 
     @Bean
     public JedisPool redisPoolFactory() {
-        JedisPool jedisPool = new JedisPool(this.redisConfigProperties, this.redisConfigProperties.getHost(), this.redisConfigProperties.getPort(), 0, this.redisConfigProperties.getTtl().intValue(), this.redisConfigProperties.getPassword(), this.redisConfigProperties.getDatabase(), (String) null, false, (SSLSocketFactory) null, (SSLParameters) null, (HostnameVerifier) null);
+        JedisPool jedisPool = new JedisPool(this.redisConfigProperties, this.redisConfigProperties.getHost(), this.redisConfigProperties.getPort(), this.redisConfigProperties.getTimeout(), this.redisConfigProperties.getTtl().intValue(), this.redisConfigProperties.getPassword(), this.redisConfigProperties.getDatabase(), (String) null, false, (SSLSocketFactory) null, (SSLParameters) null, (HostnameVerifier) null);
         return jedisPool;
     }
 
@@ -68,7 +68,7 @@ public class RedisCustConfig extends CachingConfigurerSupport {
         if (this.redisConfigProperties.isCluster()) {
             ((ClusterServersConfig) config.useClusterServers().addNodeAddress(new String[]{"redis://" + this.redisConfigProperties.getHost() + ":" + this.redisConfigProperties.getPort()}).setPassword(this.redisConfigProperties.getPassword())).setTimeout(this.redisConfigProperties.getTtl().intValue());
         } else {
-            ((SingleServerConfig) config.useSingleServer().setAddress("redis://" + this.redisConfigProperties.getHost() + ":" + this.redisConfigProperties.getPort()).setPassword(this.redisConfigProperties.getPassword())).setTimeout(this.redisConfigProperties.getTtl().intValue());
+            ((SingleServerConfig) config.useSingleServer().setAddress("redis://" + this.redisConfigProperties.getHost() + ":" + this.redisConfigProperties.getPort()).setPassword(this.redisConfigProperties.getPassword())).setTimeout(this.redisConfigProperties.getTtl().intValue()).setConnectTimeout(this.redisConfigProperties.getTimeout());
         }
 
         return Redisson.create(config);

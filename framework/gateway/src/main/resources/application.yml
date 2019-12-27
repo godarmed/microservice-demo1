@@ -72,6 +72,10 @@ spring:
         uri: lb://CONSUMER-8100
         predicates:
         - Path=/consumer-8100/**
+      - id: provider-8110
+        uri: lb://PROVIDER-8110
+        predicates:
+        - Path=/provider-8110/**
 
 eureka:
   client:

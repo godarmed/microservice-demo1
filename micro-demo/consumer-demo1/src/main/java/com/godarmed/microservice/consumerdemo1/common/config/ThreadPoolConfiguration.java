@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 @Slf4j
-public class ThreadPoolConfiguration implements AsyncConfigurer {
+public class ThreadPoolConfiguration{
 
     private int maxPoolSize = 10;
 
@@ -45,9 +45,9 @@ public class ThreadPoolConfiguration implements AsyncConfigurer {
 
     //线程池配置
     @Bean("taskExecutor")
-    @Override
+    //@Override
     public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor taskExecutor = new VisiableThreadPoolTaskExecutor();
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         //最大线程数：线程池最大的线程数，只有在缓冲队列满了之后才会申请超过核心线程数的线程
         taskExecutor.setMaxPoolSize(maxPoolSize);
         //核心线程数：线程池创建时候初始化的线程数
@@ -90,7 +90,7 @@ public class ThreadPoolConfiguration implements AsyncConfigurer {
 
 
     //异常处理配置（对于无返回值的方法）
-    @Override
+    //@Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new SpringAsyncExceptionHandler();
     }

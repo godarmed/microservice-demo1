@@ -9,6 +9,7 @@ import com.godarmed.core.starters.redis.lock.annotation.RedisLockWaitTime;
 import com.godarmed.microservice.consumerdemo1.common.protocol.vo.RequestMsg;
 import lombok.extern.log4j.Log4j2;
 import org.redisson.Redisson;
+import org.redisson.api.RLock;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,8 @@ public class RedisLockTestController {
     public void redisLock(Integer threadNum) {
         commonValue = 0;
         for (int i = 0; i < threadNum; i++) {
-            ((RedisLockTestController)AopContext.currentProxy()).methodWithRLock();
+            String lockName = new String(LOCK_KEY);
+            ((RedisLockTestController)AopContext.currentProxy()).methodWithRLock(lockName);
         }
     }
 
@@ -40,12 +42,11 @@ public class RedisLockTestController {
     }
 
     @Async
-    public void methodWithRLock(){
-        RLockHandler rLockHandler = null;
+    public void methodWithRLock(String lockName){
+        RLock rLock = null;
         try{
             //此操作是互斥的，同一时刻仅有一个持有者
-            rLockHandler = new RLockHandler();
-            if(!rLockHandler.acquire(LOCK_KEY,1*60L,10L)){
+            if((rLock = RLockHandler.lock(lockName,1*60))==null){
                 throw new RuntimeException("获取锁失败");
             }
 
@@ -60,9 +61,12 @@ public class RedisLockTestController {
         } catch (Exception e) {
             log.info("执行任务[{}]出错,出错原因[{}]",Thread.currentThread().getName(),e.getMessage());
         }finally {
-            if(rLockHandler!=null){
-                rLockHandler.release(LOCK_KEY);
+            try{
+                RLockHandler.release(rLock);
+            }catch (Exception e){
+                log.info(e.getMessage());
             }
+
         }
     }
 
