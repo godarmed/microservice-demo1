@@ -46,8 +46,8 @@ public class FeignTestConController {
 
 
     @RequestMapping("/getMultipartFile")
-    public void getMultipartFile(HttpServletResponse response) {
-        Response source = feignTestServiceFeign.getMultipartFile();
+    public void getMultipartFile(String fileName,HttpServletResponse response) {
+        Response source = feignTestServiceFeign.getMultipartFile(fileName);
         BufferedOutputStream out = null;
         try {
             out = new BufferedOutputStream(response.getOutputStream());

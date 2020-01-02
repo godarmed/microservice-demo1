@@ -27,7 +27,7 @@ public interface FeignTestServiceFeign {
 
     @RequestLine("GET /feignTest/getMultipartFile")
     @Headers({"Content-Type: application/json", "Accept: application/json"})
-    public Response getMultipartFile();
+    public Response getMultipartFile(String fileName);
 
     @RequestLine("POST /feignTest/getMultipartFiles")
     @Headers({"Content-Type: application/json", "Accept: application/json"})

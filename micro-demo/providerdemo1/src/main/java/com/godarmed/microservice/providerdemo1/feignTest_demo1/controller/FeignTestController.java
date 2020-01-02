@@ -42,7 +42,7 @@ public class FeignTestController{
 
 
     @RequestMapping("/feignTest/getMultipartFile")
-    public void getMultipartFile(HttpServletResponse response){
+    public void getMultipartFile(String fileName,HttpServletResponse response){
         BufferedOutputStream out = null;
         try {
             out = new BufferedOutputStream(response.getOutputStream());
@@ -56,7 +56,7 @@ public class FeignTestController{
             config.setBackColor(Color.GRAY.getRGB());
 
             // 生成二维码到文件，也可以到流
-            QrCodeUtil.generate("http://hutool.cn/", config,"jpg", out);
+            QrCodeUtil.generate(fileName, config,"jpg", out);
 
             //输出文件
             out.flush();
