@@ -4,6 +4,7 @@ import com.godarmed.core.starters.feignwrapper.fallbacks.IHystrix;
 import com.godarmed.core.starters.global.entity.ResultModel;
 import com.godarmed.core.starters.global.entity.UserViews;
 import com.godarmed.core.starters.system.exception.errors.BaseHandlerException;
+import com.godarmed.microservice.protocol.feigntestprotocol.entity.GetQrImgZipDTO;
 import com.godarmed.microservice.protocol.feigntestprotocol.protocol.FeignTestServiceFeign;
 import feign.Response;
 import lombok.extern.log4j.Log4j2;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 public class FeignTestServiceFeignHystrix implements FeignTestServiceFeign, IHystrix {
@@ -35,6 +37,11 @@ public class FeignTestServiceFeignHystrix implements FeignTestServiceFeign, IHys
 
     @Override
     public Response getMultipartFile() {
+        throw new BaseHandlerException(500, throwable == null ? "未知异常" : throwable.getMessage());
+    }
+
+    @Override
+    public Map<String, byte[]> getMultipartFiles(GetQrImgZipDTO request) {
         throw new BaseHandlerException(500, throwable == null ? "未知异常" : throwable.getMessage());
     }
 

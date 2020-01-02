@@ -16,6 +16,6 @@ public class FeignProperties implements Serializable {
     private static final long serialVersionUID = 1L;
     private String protocol = "http";
     private String gateway = "Gateway";
-    private String headerClass = "com.eseasky.core.starters.feign.wrapper.config.DefaultHeaderSet";
+    private String headerClass = "com.godarmed.core.starters.feignwrapper.config.DefaultHeaderSet";
     private List<FeignConfig> clients = new ArrayList();
 }

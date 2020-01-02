@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+</head>
+<body>
+
+    <a href="javascript:void(0)" onclick="getImgs()" >转换二维码</a>
+    <a id="zip" href="javascript:void(0)" download="" style="display:none"></a>
+    <div>
+        <div id="transResultTitle">转换结果</div>
+        <div id="transResult"></div>
+    </div>
+</body>
+<script type="application/javascript">
+    function getImgs(){
+        //设置请求参数
+        var url = ["http://localhost:8100/consumer-8100/feignTest/getMultipartFiles"];
+        var zipName = "获取二维码.zip";
+        var qrCodes = ["http://www.baidu.com","http://www.github.com"];
+
+        //拼接参数
+        url.push("?zipName=");
+        url.push(zipName);
+        for (var index in qrCodes) {
+            url.push("&urls=");
+            url.push(qrCodes[index])
+        }
+
+        $('#zip').attr("href",url.join(""));
+        $('#zip').attr("download",zipName);
+        //点击
+        $('#zip')[0].click();
+    }
+
+</script>
+</html>
