@@ -36,7 +36,7 @@ public class FeignTestServiceFeignHystrix implements FeignTestServiceFeign, IHys
     }
 
     @Override
-    public Response getMultipartFile() {
+    public Response getMultipartFile(String fileName) {
         throw new BaseHandlerException(500, throwable == null ? "未知异常" : throwable.getMessage());
     }
 

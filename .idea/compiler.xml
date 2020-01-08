@@ -24,6 +24,7 @@
         <module name="providerdemo1" />
         <module name="rabbitmq" />
         <module name="redis" />
+        <module name="report-service" />
         <module name="system" />
       </profile>
     </annotationProcessing>
@@ -50,6 +51,7 @@
       <module name="providerdemo1" target="1.8" />
       <module name="rabbitmq" target="1.8" />
       <module name="redis" target="1.8" />
+      <module name="report-service" target="1.8" />
       <module name="starters" target="1.8" />
       <module name="system" target="1.8" />
     </bytecodeTargetLevel>

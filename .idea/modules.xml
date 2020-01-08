@@ -23,6 +23,7 @@
       <module fileurl="file://$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" filepath="$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/report-service/report-service.iml" filepath="$PROJECT_DIR$/framework/report-service/report-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/starters.iml" filepath="$PROJECT_DIR$/starters/starters.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/system/system.iml" filepath="$PROJECT_DIR$/starters/system/system.iml" />
     </modules>
