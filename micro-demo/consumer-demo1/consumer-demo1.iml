@@ -253,7 +253,7 @@
     <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:1.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.rabbitmq:amqp-client:5.4.3" level="project" />
     <orderEntry type="module" module-name="logger-client" />
-    <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.0.7" level="project" />
+    <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.1.0" level="project" />
     <orderEntry type="module" module-name="feigntest-protocol" />
     <orderEntry type="module" module-name="feign-wrapper" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.0.2.RELEASE" level="project" />

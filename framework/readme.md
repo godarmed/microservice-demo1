@@ -13,6 +13,7 @@
 - 日志服务（开发中）：Logger-Service，默认端口：9850
 - 字典服务（开发中）：Dictionary-Service，默认端口：9860
 - 图片服务（开发中）：Picture-Service，默认端口：9870
+- 报表服务（开发中）：Report-Service，默认端口：9880
 
 #技术选型
 

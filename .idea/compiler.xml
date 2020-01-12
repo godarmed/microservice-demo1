@@ -6,25 +6,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="admin" />
-        <module name="auth-client" />
-        <module name="auth-server" />
         <module name="auth-service" />
-        <module name="consumer-demo1" />
-        <module name="datasource" />
-        <module name="eureka-server" />
-        <module name="feign-wrapper" />
-        <module name="feigntest-protocol" />
-        <module name="gateway" />
-        <module name="global" />
-        <module name="global (1)" />
         <module name="httpclient" />
+        <module name="admin" />
+        <module name="consumer-demo1" />
+        <module name="gateway" />
+        <module name="global (1)" />
+        <module name="report-service" />
+        <module name="redis" />
+        <module name="rabbitmq" />
+        <module name="datasource" />
+        <module name="auth-server" />
+        <module name="auth-client" />
+        <module name="feign-wrapper" />
         <module name="logger-client" />
+        <module name="eureka-server" />
         <module name="logger-service" />
         <module name="providerdemo1" />
-        <module name="rabbitmq" />
-        <module name="redis" />
-        <module name="report-service" />
+        <module name="global" />
+        <module name="feigntest-protocol" />
         <module name="system" />
       </profile>
     </annotationProcessing>
@@ -65,14 +65,18 @@
       <module name="consumer-demo1" options="-parameters" />
       <module name="datasource" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="feign-wrapper" options="-parameters" />
+      <module name="feigntest-protocol" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="global" options="-parameters" />
       <module name="global (1)" options="-parameters" />
       <module name="httpclient" options="-parameters" />
       <module name="logger-client" options="-parameters" />
       <module name="logger-service" options="-parameters" />
+      <module name="providerdemo1" options="-parameters" />
       <module name="rabbitmq" options="-parameters" />
       <module name="redis" options="-parameters" />
+      <module name="report-service" options="-parameters" />
       <module name="system" options="-parameters" />
     </option>
   </component>

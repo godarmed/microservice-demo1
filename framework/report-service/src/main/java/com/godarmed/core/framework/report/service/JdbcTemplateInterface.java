@@ -1,5 +1,6 @@
 package com.godarmed.core.framework.report.service;
 
+import com.godarmed.core.framework.report.model.entity.MetaDataBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -11,17 +12,17 @@ public interface JdbcTemplateInterface {
     /**
      * 同步元数据
      */
-    /*List<MetaDataBean> syncMetaData(String tableName, String url);*/
+    List<MetaDataBean> getMetaData(String tableName, String url);
 
     /**
      * 数据展现
      */
-    List<Map<String, Object>> displayMasterData(String tableName, Integer nowPage, Integer pageSize);
+    List<Map<String, Object>> displayMasterData(List<MetaDataBean> metaData, String tableName, Integer nowPage, Integer pageSize);
 
     /**
      * 数据导入
      */
-    void importMasterData(List<Map<String, Object>> data, String tableName);
+    void importMasterData(List<MetaDataBean> metaDatas, List<Map<String, Object>> data, String tableName);
 
     /**
      * 数据服务

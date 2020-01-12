@@ -1,0 +1,62 @@
+custom:
+  app:
+    token:
+      timeout: 86400
+  nosql:
+    redis:
+      host: 47.101.136.249
+      port: 6379
+    rabbitmq:
+      addresses: 47.101.136.249:5672
+      port: 5672
+      username: admin
+      password: zzy123456
+  db:
+    url: jdbc:mysql://47.101.136.249:3306/mnet?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: zzy123456
+    driver-class-name: com.mysql.jdbc.Driver
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  db1:
+    url: jdbc:mysql://47.101.136.249:3306/mnet?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: zzy123456
+    driver-class-name: com.mysql.jdbc.Driver
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  oauth:
+    ip: localhost:9820
+    clientId: test
+    clientSecret: 123456
+  #文件上传配置，保存的路径
+  upload:
+    #文件保存的路径(服务器主机删的绝对路径，如若没有请新建)
+    absolute-path: D:\images
+
+
+
+eurekaserver:
+  ip: localhost
+  port: 9810
+
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+
+
+logging:
+  level:
+    com.suoju.montnets.common.dao:  DEBUG
+
+token:
+  expire:
+    seconds: 86400
+
+
+
+swagger:
+  enable: true
+
+exclude:
+  check:
+    token:  /loginservice/**,/error/**,/images/**,/webjars/**,/**/doc.html,/**/swagger-resources,/v2/**

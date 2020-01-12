@@ -1,5 +1,5 @@
 server:
-  port: 9850
+  port: 9880
   servlet:
     context-path: /ReportService
     
@@ -17,7 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   profiles:
     active: "@profileActive@"
@@ -140,7 +140,7 @@ security:
       grant-type: client_credentials,password,authorization_code,implicit,refresh_token
       pre-established-redirect-uri: http://baidu.com
       scope: all
-      ignoreUrl: /actuator/**
+      ignoreUrl: /actuator/**,/**
 
 
 feign:

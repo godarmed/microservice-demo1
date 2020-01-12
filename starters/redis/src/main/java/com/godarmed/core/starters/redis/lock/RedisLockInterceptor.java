@@ -50,23 +50,27 @@ public class RedisLockInterceptor {
         initiateArgs(proceedingJoinPoint);
         Object response = null;
         RedisUtils redisUtils = null;
+        String requestId = null;
         try {
             redisUtils = new RedisUtils();
             //获取锁
-            String requestId = redisUtils.getLock(LOCK_NAME.get(), LOCK_TIMEOUT.get(), 0L);
+            requestId = redisUtils.getLock(LOCK_NAME.get(), LOCK_TIMEOUT.get(), 0L);
             if (requestId == null) {
                 throw new RuntimeException(METHOD_NAME.get() + "获取锁失败");
             }
             response = proceedingJoinPoint.proceed();
-            //释放锁
-            redisUtils.releaseLock(LOCK_NAME.get(), requestId);
+
         } catch (Throwable e) {
             log.info(e.getMessage());
         } finally {
-            removeArgs();
+            //释放锁
+            redisUtils.releaseLock(LOCK_NAME.get(), requestId);
+            //释放工具类
             if (redisUtils != null) {
                 redisUtils.close();
             }
+            //清除ThreadLocal中的变量
+            removeArgs();
         }
         return response;
     }
@@ -99,6 +103,12 @@ public class RedisLockInterceptor {
         CLASS_NAME.set(className);
         METHOD_NAME.set(methodName);
         ARGS.set(args);
+
+        if(log.isDebugEnabled()){
+            log.debug("当前类名称为[{}]",CLASS_NAME.get());
+            log.debug("当前方法为[{}]",METHOD_NAME.get());
+            log.debug("方法参数为[{}]",ARGS.get());
+        }
     }
 
     /**

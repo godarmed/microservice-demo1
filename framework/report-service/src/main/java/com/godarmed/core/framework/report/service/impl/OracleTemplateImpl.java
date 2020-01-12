@@ -1,13 +1,16 @@
 package com.godarmed.core.framework.report.service.impl;
 
+import com.godarmed.core.framework.report.model.entity.MetaDataBean;
 import com.godarmed.core.framework.report.service.JdbcTemplateAbstract;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +23,8 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
      * @param tableName
      * @return 数据
      */
-    /*@Override
-    public List<MetaDataBean> syncMetaData(String tableName, String url) {
+    @Override
+    public List<MetaDataBean> getMetaData(String tableName, String url) {
 
         String sqlStr = "SELECT       " +
                 "     T1.TABLE_NAME  AS tableName,    " +
@@ -64,28 +67,28 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
         }
 
         return list;
-    }*/
+    }
 
     /**
      * 主数据展现
      *
-     * @param mdmHeaderList
+     * @param metaDatas
      * @param tableName
      * @param nowPage
      * @param pageSize
      * @return
      */
     @Override
-    public List<Map<String, Object>> displayMasterData(String tableName, Integer nowPage, Integer pageSize) {
+    public List<Map<String, Object>> displayMasterData(List<MetaDataBean> metaDatas, String tableName, Integer nowPage, Integer pageSize) {
 
-        /*StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("SELECT ");
-        for (int i = 0; i < mdmHeaderList.size(); i++) {
-            if (i == mdmHeaderList.size() - 1) {
-                sb.append(mdmHeaderList.get(i).getColumnEngName());
+        for (int i = 0; i < metaDatas.size(); i++) {
+            if (i == metaDatas.size() - 1) {
+                sb.append(metaDatas.get(i).getColumnEngName());
             } else {
-                sb.append(mdmHeaderList.get(i).getColumnEngName()).append(",");
+                sb.append(metaDatas.get(i).getColumnEngName()).append(",");
             }
         }
         sb.append("  FROM (SELECT T.*, ROWNUM RN " +
@@ -108,8 +111,7 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
             mapList = new ArrayList<>();
         }
 
-        return mapList;*/
-        return null;
+        return mapList;
     }
 
     /**
@@ -117,16 +119,16 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
      */
     @Transactional(rollbackOn = Throwable.class)
     @Override
-    public void importMasterData(List<Map<String, Object>> data, String tableName) {
+    public void importMasterData(List<MetaDataBean> metaDatas, List<Map<String, Object>> data, String tableName) {
 
-        /*//sql
+        //sql
         final StringBuilder preSql = new StringBuilder();
         final StringBuilder titles = new StringBuilder();
         final StringBuilder values = new StringBuilder();
 
         //表头及数据
-        mtMetaDataEntities.stream().forEach(item -> {
-            titles.append(item.getMtEngName()).append(",");
+        metaDatas.stream().forEach(item -> {
+            titles.append(item.getColumnEngName()).append(",");
             values.append(" ? ").append(",");
         });
         titles.deleteCharAt(titles.length() - 1);
@@ -147,7 +149,7 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
 
                     //注入参数值
                     try {
-                        setvalue(ps, mtMetaDataEntities, data, i);
+                        setvalue(ps, metaDatas, data, i);
                         System.out.println(ps);
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -163,14 +165,27 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
             System.out.println(count);
         } catch (DataAccessException e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
 
-    /*private void setvalue(PreparedStatement ps, List<MtMetaDataEntity> MetaDatas, List<Map<String, Object>> data, int i) throws SQLException {
+    /**
+     * 数据服务
+     */
+    @Override
+    public List<Map<String, Object>> serviceMasterData(String tableName) {
+
+        String selectSql = "select * from " + tableName;
+
+        List<Map<String, Object>> mapList = super.jdbcTemplate.queryForList(selectSql);
+
+        return mapList;
+    }
+
+    private void setvalue(PreparedStatement ps, List<MetaDataBean> MetaDatas, List<Map<String, Object>> data, int i) throws SQLException {
         for (int j = 0; j < MetaDatas.size(); j++) {
-            String dataType = MetaDatas.get(j).getMtDataType();
-            Object obj = data.get(i).get(MetaDatas.get(j).getMtChnName());
+            String dataType = MetaDatas.get(j).getDataType();
+            Object obj = data.get(i).get(MetaDatas.get(j).getColumnChnName());
             if (dataType.contains("DATE")) {
                 ps.setDate(j + 1, new Date((long) obj));
                 //ps.setObject(j+1, new Time((long)obj), Types.DATE);
@@ -188,27 +203,12 @@ public class OracleTemplateImpl extends JdbcTemplateAbstract {
                 }else{
                     ps.setString(j + 1, num);
                 }
-                //ps.setObject(j+1, Integer.valueOf((String)obj), Types.INTEGER);
             } else if (dataType.contains("VARCHAR2")) {
                 ps.setString(j + 1, (String) obj);
-                //ps.setObject(j+1, (String)obj, Types.VARCHAR);
             } else {
                 ps.setString(j + 1, (String) obj);
             }
         }
-    }*/
-
-    /**
-     * 数据服务
-     */
-    @Override
-    public List<Map<String, Object>> serviceMasterData(String tableName) {
-
-        String selectSql = "select * from " + tableName;
-
-        List<Map<String, Object>> mapList = super.jdbcTemplate.queryForList(selectSql);
-
-        return mapList;
     }
 
 }

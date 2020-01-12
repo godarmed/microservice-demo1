@@ -1,5 +1,6 @@
 package com.godarmed.core.framework.report.service;
 
+import com.godarmed.core.framework.report.constant.GlobalConstants;
 import com.godarmed.core.framework.report.service.impl.MysqlTemplateImpl;
 import com.godarmed.core.framework.report.service.impl.OracleTemplateImpl;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -23,15 +24,15 @@ public class JdbcTemplateFactory {
         JdbcTemplateInterface customTemplate = null;
         switch (dataBaseType.toUpperCase()) {
 
-            case "ORACLE":
+            case GlobalConstants.DATABASE_TYPE.ORACLE:
                 customTemplate = new OracleTemplateImpl();
                 break;
 
-            case "MYSQL":
+            case GlobalConstants.DATABASE_TYPE.MYSQL:
                 customTemplate = new MysqlTemplateImpl();
                 break;
 
-            case "SQLSERVER":
+            case GlobalConstants.DATABASE_TYPE.SQL_SERVER:
                 //customTemplate = new MdmSqlserverTemplateImpl();
                 break;
 
