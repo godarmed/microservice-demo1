@@ -78,7 +78,7 @@ public class ExcelEntityDetail extends BaseRowModel implements Serializable{
     //服务号信息
 	@ApiModelProperty(value = "端口号zip批量申请任务表")
 	@ManyToOne(cascade=CascadeType.DETACH ,fetch = FetchType.LAZY)
-	@JoinColumn(name="task_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+	@JoinColumn(name="task_id")
 	@NotFound(action = NotFoundAction.IGNORE)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JsonBackReference

@@ -5,20 +5,20 @@ custom:
   nosql:
     redis:
       host: 47.101.136.249
-      port: 6379
+      port: 9209
     rabbitmq:
       addresses: 47.101.136.249:5672
       port: 5672
       username: admin
       password: zzy123456
   db:
-    url: jdbc:mysql://47.101.136.249:3306/mnet?useSSL=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://47.101.136.249:18765/mnet?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: zzy123456
     driver-class-name: com.mysql.jdbc.Driver
     database-platform: org.hibernate.dialect.MySQL5Dialect
   db1:
-    url: jdbc:mysql://47.101.136.249:3306/mnet?useSSL=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://47.101.136.249:18765/mnet?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: zzy123456
     driver-class-name: com.mysql.jdbc.Driver

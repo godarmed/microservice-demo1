@@ -16,9 +16,7 @@ public class Client {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public Client() {
-        System.out.println("client start");
-    }
+    public Client() {}
 
     public String getResultFromPython(RPCRequest<?> req, String queue) {
         String message = JSON.toJSONString(req);
