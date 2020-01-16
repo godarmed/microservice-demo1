@@ -1,5 +1,7 @@
 package com.godarmed.microservice.consumerdemo1.validater_demo.controller;
 
+import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumEnum;
+import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumInValidator;
 import com.godarmed.microservice.consumerdemo1.validater_demo.protocol.dto.ResourceBindingRuleDTO;
 import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
@@ -8,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/resourceBindRule")
@@ -36,5 +38,12 @@ public class ResourceBindRuleController {
     public Object delete(@RequestBody @Validated(ResourceBindingRuleDTO.DeleteOne.class) ResourceBindingRuleDTO request){
         return request;
     }
+
+    @RequestMapping(value = "/resetNumList")
+    public void resetNumList(@RequestBody List<Integer> nums){
+        NumInValidator.resetNumEnum(NumEnum.class,nums);
+    }
+
+
 
 }
