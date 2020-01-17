@@ -1,8 +1,5 @@
 package com.godarmed.microservice.consumerdemo1.validater_demo.config;
 
-
-import org.apache.poi.ss.formula.functions.T;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
@@ -14,12 +11,16 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = NumInValidator.class )
 public @interface NumIn{
     String message() default "数值范围限定";
-
-    Class<? extends Enum> enumValid();
  
     Class<?>[] groups() default {};
  
     Class<? extends Payload>[] payload() default {};
+
+    String name();
+
+    int[] nums() default {};
+
+    boolean useDefaultNums() default true;
 
     @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.RUNTIME)

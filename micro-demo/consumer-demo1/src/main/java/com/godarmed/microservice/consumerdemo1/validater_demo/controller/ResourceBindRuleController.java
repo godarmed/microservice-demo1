@@ -1,6 +1,5 @@
 package com.godarmed.microservice.consumerdemo1.validater_demo.controller;
 
-import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumEnum;
 import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumInValidator;
 import com.godarmed.microservice.consumerdemo1.validater_demo.protocol.dto.ResourceBindingRuleDTO;
 import io.swagger.annotations.Api;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/resourceBindRule")
@@ -40,10 +41,9 @@ public class ResourceBindRuleController {
     }
 
     @RequestMapping(value = "/resetNumList")
-    public void resetNumList(@RequestBody List<Integer> nums){
-        NumInValidator.resetNumEnum(NumEnum.class,nums);
+    public void resetNumList(String numsName,int[] nums){
+        NumInValidator.resetNumArray(numsName, Arrays.stream(nums).boxed().collect(Collectors.toList()));
     }
-
 
 
 }

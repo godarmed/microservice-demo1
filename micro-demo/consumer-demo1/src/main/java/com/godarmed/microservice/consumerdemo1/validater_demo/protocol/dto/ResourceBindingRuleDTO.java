@@ -1,13 +1,14 @@
 package com.godarmed.microservice.consumerdemo1.validater_demo.protocol.dto;
 
-import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumEnum;
 import com.godarmed.microservice.consumerdemo1.validater_demo.config.NumIn;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Arrays;
 
 @Data
 public class ResourceBindingRuleDTO implements Serializable {
@@ -51,11 +52,12 @@ public class ResourceBindingRuleDTO implements Serializable {
     @ApiModelProperty(value = "规则描述")
     private String note;
 
-    @NumIn(message = "规则状态超出范围", enumValid = NumEnum.class, groups = {AddOne.class, UpdateOne.class})
+    @NumIn(message = "规则状态超出限制",name = "规则状态",nums = {0,1,2}, groups = {AddOne.class, UpdateOne.class})
     @NotNull(message = "规则状态不能为空", groups = {AddOne.class, UpdateOne.class})
     @ApiModelProperty(value = "规则状态", example = "0 - 启用 1 - 不启用")
     private Integer status;
 
+    @NumIn(message = "规则类型超出限制",name = "规则类型",nums = {0,1}, groups = {AddOne.class, UpdateOne.class})
     @NotNull(message = "规则类型不能为空", groups = {AddOne.class, UpdateOne.class})
     @ApiModelProperty(value = "规则类型", example = "0,1,2,3")
     private Integer type;
