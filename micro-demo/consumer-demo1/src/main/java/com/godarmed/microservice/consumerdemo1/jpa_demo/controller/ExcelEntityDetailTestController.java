@@ -37,13 +37,13 @@ public class ExcelEntityDetailTestController {
         return msgReturn;
     }
 
-    @RequestMapping("/findExcelAll")
-    public ResultModel<ExcelEntityDetail> findExcelDetailAll() {
+    /*@RequestMapping("/findExcelAll")
+    public ResultModel<ExcelEntityDetail> findExcelDetailAll(@RequestBody ExcelEntityDetailDTO request) {
         ResultModel<ExcelEntityDetail> msgReturn = new ResultModel<>();
-        ExcelEntityDetail excelEntityDetail = excelEntityDetailService.queryByPage();
+        ExcelEntityDetail excelEntityDetail = excelEntityDetailService.queryByPage(request);
         msgReturn.setData(excelEntityDetail);
         return msgReturn;
-    }
+    }*/
 
     @RequestMapping("/deleteExcelDetailById")
     public ResultModel<ExcelEntityDetail> deleteExcelDetailById(@RequestBody ExcelEntityDetailDTO excelEntityDetailDTO) {

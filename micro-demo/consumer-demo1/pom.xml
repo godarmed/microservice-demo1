@@ -112,7 +112,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!--eseasky组件依赖-->
+        <!--公共组件依赖-->
         <dependency>
             <groupId>com.godarmed.core.starters</groupId>
             <artifactId>system</artifactId>
@@ -232,6 +232,21 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <!--允许移动生成的文件-->
+                    <verbose>true</verbose>
+                    <!--允许自动覆盖文件-->
+                    <overwrite>true</overwrite>
+                    <configurationFile>
+                        src/main/resources/generatorConfig.xml
+                    </configurationFile>
                 </configuration>
             </plugin>
         </plugins>

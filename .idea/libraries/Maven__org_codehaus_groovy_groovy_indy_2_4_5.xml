@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.codehaus.groovy:groovy:indy:2.4.5">
     <CLASSES>
-      <root url="jar://E:/maven/leo-repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-indy.jar!/" />
+      <root url="jar://D:/softWares/maven/repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-indy.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://E:/maven/leo-repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-javadoc.jar!/" />
+      <root url="jar://D:/softWares/maven/repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://E:/maven/leo-repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-sources.jar!/" />
+      <root url="jar://D:/softWares/maven/repository/org/codehaus/groovy/groovy/2.4.5/groovy-2.4.5-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

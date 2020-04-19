@@ -3,11 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/framework/admin/admin.iml" filepath="$PROJECT_DIR$/framework/admin/admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alibaba-demo/alibaba-demo.iml" filepath="$PROJECT_DIR$/alibaba-demo/alibaba-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/auth-client/auth-client.iml" filepath="$PROJECT_DIR$/starters/auth-client/auth-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/auth-server/auth-server.iml" filepath="$PROJECT_DIR$/starters/auth-server/auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/framework/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/consumer-demo1/consumer-demo1.iml" filepath="$PROJECT_DIR$/micro-demo/consumer-demo1/consumer-demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/datasource/datasource.iml" filepath="$PROJECT_DIR$/starters/datasource/datasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-demo/default-demo/default-demo.iml" filepath="$PROJECT_DIR$/micro-demo/default-demo/default-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/framework/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/feign-wrapper/feign-wrapper.iml" filepath="$PROJECT_DIR$/starters/feign-wrapper/feign-wrapper.iml" />
@@ -20,6 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/framework/logger-service/logger-service.iml" filepath="$PROJECT_DIR$/framework/logger-service/logger-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/micro-demo.iml" filepath="$PROJECT_DIR$/micro-demo/micro-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/protocol/protocol.iml" filepath="$PROJECT_DIR$/micro-demo/protocol/protocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alibaba-demo/provider-9500/provider-9500.iml" filepath="$PROJECT_DIR$/alibaba-demo/provider-9500/provider-9500.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" filepath="$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />

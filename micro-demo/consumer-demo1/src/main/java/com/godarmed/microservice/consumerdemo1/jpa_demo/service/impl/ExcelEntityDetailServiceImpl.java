@@ -1,5 +1,8 @@
 package com.godarmed.microservice.consumerdemo1.jpa_demo.service.impl;
 
+import cn.hutool.poi.excel.BigExcelWriter;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity.ExcelEntityDetail;
 import com.godarmed.microservice.consumerdemo1.jpa_demo.models.entity.ExcelEntityTask;
 import com.godarmed.microservice.consumerdemo1.jpa_demo.models.service.ExcelEntityDetailDAO;
@@ -26,6 +29,10 @@ import java.util.List;
 
 @Service
 public class ExcelEntityDetailServiceImpl implements ExcelEntityDetailService {
+
+    ExcelUtil excelUtil;
+
+    BigExcelWriter writer;
 
     @Autowired
     ExcelEntityDetailDAO excelEntityDetailDAO;
@@ -96,5 +103,10 @@ public class ExcelEntityDetailServiceImpl implements ExcelEntityDetailService {
     @Override
     public ExcelEntityDetail queryById(Long id) {
         return excelEntityDetailDAO.findExcelEntityById(id);
+    }
+
+    @Override
+    public List<ExcelEntityDetail> queryAll(ExcelEntityDetailDTO request) {
+        return null;
     }
 }
