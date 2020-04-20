@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.github.xiaoymin:swagger-bootstrap-ui:1.9.1">
     <CLASSES>
-      <root url="jar://D:/softWares/maven/repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1.jar!/" />
+      <root url="jar://E:/maven/leo-repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://D:/softWares/maven/repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1-javadoc.jar!/" />
+      <root url="jar://E:/maven/leo-repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://D:/softWares/maven/repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1-sources.jar!/" />
+      <root url="jar://E:/maven/leo-repository/com/github/xiaoymin/swagger-bootstrap-ui/1.9.1/swagger-bootstrap-ui-1.9.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

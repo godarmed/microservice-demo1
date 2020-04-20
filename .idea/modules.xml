@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/starters/auth-client/auth-client.iml" filepath="$PROJECT_DIR$/starters/auth-client/auth-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/auth-server/auth-server.iml" filepath="$PROJECT_DIR$/starters/auth-server/auth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/framework/auth-service/auth-service.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/cloud2020.iml" filepath="$USER_HOME$/Desktop/cloud2020.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alibaba-demo/consumer-9600/consumer-9600.iml" filepath="$PROJECT_DIR$/alibaba-demo/consumer-9600/consumer-9600.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/consumer-demo1/consumer-demo1.iml" filepath="$PROJECT_DIR$/micro-demo/consumer-demo1/consumer-demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/datasource/datasource.iml" filepath="$PROJECT_DIR$/starters/datasource/datasource.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/default-demo/default-demo.iml" filepath="$PROJECT_DIR$/micro-demo/default-demo/default-demo.iml" />
@@ -23,6 +25,8 @@
       <module fileurl="file://$PROJECT_DIR$/micro-demo/micro-demo.iml" filepath="$PROJECT_DIR$/micro-demo/micro-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/protocol/protocol.iml" filepath="$PROJECT_DIR$/micro-demo/protocol/protocol.iml" />
       <module fileurl="file://$PROJECT_DIR$/alibaba-demo/provider-9500/provider-9500.iml" filepath="$PROJECT_DIR$/alibaba-demo/provider-9500/provider-9500.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alibaba-demo/provider-9501/provider-9501.iml" filepath="$PROJECT_DIR$/alibaba-demo/provider-9501/provider-9501.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alibaba-demo/provider9501/provider9501.iml" filepath="$PROJECT_DIR$/alibaba-demo/provider9501/provider9501.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" filepath="$PROJECT_DIR$/micro-demo/providerdemo1/providerdemo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/starters/rabbitmq/rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/starters/redis/redis.iml" filepath="$PROJECT_DIR$/starters/redis/redis.iml" />

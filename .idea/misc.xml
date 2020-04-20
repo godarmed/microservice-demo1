@@ -21,10 +21,14 @@
         <option value="$PROJECT_DIR$/micro-demo/default-demo/pom.xml" />
         <option value="$PROJECT_DIR$/alibaba-demo/pom.xml" />
         <option value="$PROJECT_DIR$/alibaba-demo/provider-9500/pom.xml" />
+        <option value="$PROJECT_DIR$/alibaba-demo/consumer-9600/pom.xml" />
+        <option value="$USER_HOME$/Desktop/pom.xml" />
+        <option value="$PROJECT_DIR$/alibaba-demo/provider9501/pom.xml" />
+        <option value="$PROJECT_DIR$/alibaba-demo/provider-9501/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="9.0" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
 </project>
