@@ -77,10 +77,15 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <!--SpringCloud ailibaba nacos -->
+        <!--SpringCloud ailibaba nacos discovery-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--SpringCloud ailibaba nacos config-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!--fastjson-->
         <dependency>

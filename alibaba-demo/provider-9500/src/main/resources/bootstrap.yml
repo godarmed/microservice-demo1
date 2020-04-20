@@ -1,0 +1,24 @@
+server:
+  port: 9500
+
+logging:
+  config: classpath:log4j2.yml
+  file: ../springlogs/provider-9500.log
+
+spring:
+  application:
+    name: nacos-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置nacos地址
+      config:
+        server-addr: localhost:8848 #配置nacos地址
+        file-extension: yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
