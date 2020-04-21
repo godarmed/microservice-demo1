@@ -1,7 +1,7 @@
 package com.godarmed.microservice.defaultdemo.controller;
 
-import com.godarmed.microservice.defaultdemo.entity.TestDTO;
-import com.godarmed.microservice.defaultdemo.entity.TestVO;
+import com.godarmed.microservice.defaultdemo.model.protocol.DTO.TestDTO;
+import com.godarmed.microservice.defaultdemo.model.protocol.VO.TestVO;
 import com.godarmed.microservice.defaultdemo.util.SpringUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;

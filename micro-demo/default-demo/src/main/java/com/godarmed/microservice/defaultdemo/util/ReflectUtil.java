@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.Validate;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,5 +119,23 @@ public class ReflectUtil {
             objList.add(source.get(o));
         }
         return objList;
+    }
+
+    /**
+     * 根据反射获取对应对象的属性值
+     *
+     * @param ob
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public static Object getGetMethod(Object ob, String name) throws Exception {
+        Method[] m = ob.getClass().getMethods();
+        for (int i = 0; i < m.length; i++) {
+            if (("get" + name).toLowerCase().equals(m[i].getName().toLowerCase())) {
+                return m[i].invoke(ob);
+            }
+        }
+        return null;
     }
 }

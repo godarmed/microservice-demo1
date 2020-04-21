@@ -1,13 +1,12 @@
-package com.godarmed.microservice.defaultdemo.entity;
+package com.godarmed.microservice.defaultdemo.model.protocol.DTO;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-public class TestVO implements Serializable {
+public class TestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
