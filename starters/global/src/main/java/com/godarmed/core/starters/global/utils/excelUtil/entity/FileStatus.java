@@ -21,7 +21,7 @@ public class FileStatus implements Serializable {
     @ApiModelProperty("文件地址")
     private String path;
 
-    @ApiModelProperty("已完成行数")
+    @ApiModelProperty("需要导出的总行数")
     private Integer totalRowNum;
 
     @ApiModelProperty("已完成行数")

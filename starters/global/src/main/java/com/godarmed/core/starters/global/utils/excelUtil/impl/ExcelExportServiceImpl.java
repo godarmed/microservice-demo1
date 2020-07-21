@@ -3,7 +3,7 @@ package com.godarmed.core.starters.global.utils.excelUtil.impl;
 import com.godarmed.core.starters.global.utils.excelUtil.FileExportObserver;
 import com.godarmed.core.starters.global.utils.excelUtil.FileExportService;
 import com.godarmed.core.starters.global.utils.excelUtil.IFileWriter;
-import com.godarmed.core.starters.global.utils.excelUtil.entity.ExcelExportProperties;
+import com.godarmed.core.starters.global.utils.excelUtil.entity.ExcelExportProperty;
 import com.godarmed.core.starters.global.utils.excelUtil.entity.FileStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 	private List<FileExportObserver> observers = new ArrayList<>();
 
 	@ApiModelProperty(name = "文件导出配置")
-	private ExcelExportProperties config = null;
+	private ExcelExportProperty config = null;
 
 	@ApiModelProperty(name = "导出文件使用的线程池对象")
 	private ThreadPoolTaskExecutor taskExecutor = null;
@@ -101,7 +101,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 		//创建文件写出对象List
 		initFileWriters(fileNum,config.getExcelMaxLines());
 		//开始监控
-		asyncUpdateDataBase(this.config.getExportUpdateTime());
+		asyncUpdate(this.config.getExportUpdateTime());
 		//开始导出
 		Integer fileIndex = null;
 		Integer rowNum = null;
@@ -113,7 +113,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 				fileIndex = (int)Math.ceil((double)(i+1)/this.config.getExcelMaxLines()) - 1;
 				rowNum = (i)%this.config.getExcelMaxLines() + 1;
 			}
-			write(values.get(i), fileIndex, rowNum);
+			asyncWrite(values.get(i), fileIndex, rowNum);
 		}
 	}
 
@@ -124,7 +124,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 	 * @param rowNum
 	 * @return
 	 */
-	private int write(List<Object> values, int fileIndex, Integer rowNum){
+	private int asyncWrite(List<Object> values, int fileIndex, Integer rowNum){
 		//开始写入
 		if (values != null) {
 			taskExecutor.submit(new Runnable() {
@@ -141,7 +141,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 	/**
 	 * 异步轮询传递状态给观察者们
 	 */
-	private void asyncUpdateDataBase(Integer exportUpdateTime) {
+	private void asyncUpdate(Integer exportUpdateTime) {
 		final long startTime = System.currentTimeMillis();
 		if (observers != null && observers.size() > 0) {
 			taskExecutor.submit(new Runnable() {
@@ -189,6 +189,15 @@ public class ExcelExportServiceImpl implements FileExportService {
 	}
 
 	/**
+	 * 文件写入行数添加
+	 * @param index	文件列表下标
+	 * @return
+	 */
+	private void addFileStatusRow(int index) {
+		fileStatusList.get(index).getCurrentRowNum().addAndGet(1);
+	}
+
+	/**
 	 * 初始化文件写出配置
 	 * @param filePrefix	文件名前缀
 	 * @param heads			表头
@@ -202,8 +211,8 @@ public class ExcelExportServiceImpl implements FileExportService {
 			}
 		}
 		//初始化导出配置
-		ExcelExportProperties config = new ExcelExportProperties();
-		config.setType("excel");
+		ExcelExportProperty config = new ExcelExportProperty();
+		config.setFileType("excel");
 		config.setFileExt(getFileExt("excel"));
 		config.setHeads(heads);
 		config.setFilePrefix(filePrefix);
@@ -218,7 +227,7 @@ public class ExcelExportServiceImpl implements FileExportService {
 	 */
 	private void initFileWriters(int number,int excelMaxLines) {
 		for (int i = 0; i < number; i++) {
-			this.fileWriters.add(getWriter(this.config.getType()).init(this.config.getFilePrefix(), this.config.getHeads(), getExcelFilePath(i), excelMaxLines));
+			this.fileWriters.add(getWriter(this.config.getFileType()).init(this.config.getFilePrefix(), this.config.getHeads(), getExcelFilePath(i), excelMaxLines));
 		}
 	}
 
@@ -285,15 +294,6 @@ public class ExcelExportServiceImpl implements FileExportService {
 	}
 
 	/**
-	 * 文件写入行数添加
-	 * @param index	文件列表下标
-	 * @return
-	 */
-	private void addFileStatusRow(int index) {
-		fileStatusList.get(index).getCurrentRowNum().addAndGet(1);
-	}
-
-	/**
 	 * 更新单个文件导出状态
 	 * @param index	文件列表下标
 	 * @return
@@ -325,62 +325,9 @@ public class ExcelExportServiceImpl implements FileExportService {
 		return 0;
 	}
 
-	/**
-	 * 获取对应文件扩展名
-	 * @param type
-	 * @return
-	 */
-	private String getFileExt(String type) {
-		switch (type) {
-			case "excel":
-				return ".xlsx";
-			case "txt":
-				return ".txt";
-			case "csv":
-				return ".csv";
-			default:
-				return ".xlsx";
-		}
-	}
 
-	/**
-	 * 获取对应文件写出对象
-	 * @param type
-	 * @return
-	 */
-	private IFileWriter getWriter(String type) {
-		switch (type) {
-			case "excel":
-				return new ExcelFileWriter();
-			case "txt":
-				return new TxtWriter();
-			case "csv":
-				return new ExcelFileWriter();
-			default:
-				return new TxtWriter();
-		}
-	}
 
-	/**
-	 * 获取线程池对象
-	 * @return
-	 */
-	public ThreadPoolTaskExecutor taskExecutor(int coreWriteNumber) {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.initialize();
-		if(coreWriteNumber>50){
-			executor.setCorePoolSize(50);
-		}else{
-			executor.setCorePoolSize(coreWriteNumber);
-		}
-		executor.setMaxPoolSize(50);
-		executor.setQueueCapacity(10000);
-		executor.setKeepAliveSeconds(60);
-		executor.setThreadNamePrefix("taskExecutor-file-export-");
-		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-		executor.setWaitForTasksToCompleteOnShutdown(true);
-		return executor;
-	}
+
 
 	/**
 	 * 测试导出效果

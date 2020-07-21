@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class BaseExportProperties {
+public class BaseExportProperty {
 
     @ApiModelProperty(name = "同时导出任务的数目")
     private Integer coreNumber = 5;
@@ -19,10 +19,10 @@ public class BaseExportProperties {
     private Integer exportUpdateTime = 500;
     
     @ApiModelProperty(name = "文件下载超时时间", notes = "单位：毫秒")
-    private Integer fileMaxOverTime = 86400000;
+    private Integer fileExportTimeout = 86400000;
 
     @ApiModelProperty(name = "导出文件类型", example = "excel csv txt")
-    private String type;
+    private String fileType;
 
     @ApiModelProperty(name = "导出文件扩展名", example = ".txt .jpg .xlsx")
     private String fileExt;
